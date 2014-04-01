@@ -3,5 +3,9 @@
   "version": "0.1.0",
   "description": "Find the tap that is near you.",
   "main": "index.js",
-  "author": "Jimmy Hillis <jimmy@hillis.me>"
+  "author": "Jimmy Hillis <jimmy@hillis.me>",
+  "dependencies": {
+    "express": "~3.5.1",
+    "mongoose": "~3.8.8"
+  }
 }
