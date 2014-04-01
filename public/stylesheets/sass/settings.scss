@@ -1,0 +1,52 @@
+/**
+ * Settings
+ *
+ * Customize overall website settings, typography, colors
+ * and sizes
+ */
+
+    // Breakpoints
+    @mixin breakpoint($point){
+        @if $point == standard{
+            @media (max-width:2000px){ @content; }
+        }
+        @else if $point == tablet{
+            @media (max-width:1024px){ @content; }
+        }
+        @else if $point == mobile{
+            @media (max-width:600px){ @content; }
+        }
+        @else if $point == retina{
+            @media (-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){ @content; }
+        }
+    }
+
+    // Typography
+    $font-size:16;
+    $sans:sans-serif;
+    $serif:serif;
+    $monospace:'Courier New',Courier,'Lucida Sans Typewriter','Lucida Typewriter',monospace;
+    $font-default:$sans;
+
+    // Default colors (credit to https://github.com/mrmrs/colors @mrmrs_)
+    $aqua:#7fdbff;
+    $blue:#0074d9;
+    $navy:#001f3f;
+    $teal:#39cccc;
+    $green:#2ecc40;
+    $olive:#3d9970;
+    $lime:#01ff70;
+    $yellow:#ffdc00;
+    $orange:#ff851b;
+    $red:#ff4136;
+    $fuchsia:#f012be;
+    $purple:#b10dc9;
+    $maroon:#85144b;
+    $white:#fff;
+    $silver:#ddd;
+    $gray:#aaa;
+    $black:#111;
+
+    // Site colors
+    $standard-color:$white;
+    $highlight-color:$black;

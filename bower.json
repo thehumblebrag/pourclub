@@ -1,0 +1,11 @@
+{
+  "name": "tapthat",
+  "version": "0.1.0",
+  "dependencies": {
+    "modernizr": "2.6.x",
+    "underscore": "1.6.x",
+    "angular": "1.2.14",
+    "angular-resource": "1.2.14",
+    "angular-eyesight": "0.1.0"
+  }
+}

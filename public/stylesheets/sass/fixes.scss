@@ -1,0 +1,26 @@
+/**
+ * Display fixes
+ */
+
+    .clearfix{
+        &:after{
+            display:block;
+            visibility:hidden;
+            clear:both;
+            content:" ";
+            height:0;
+            font-size:0;
+        }
+        // ie7
+        *:first-child+html &{
+            zoom:1;
+        }
+    }
+
+    .visual-hide{
+        position:absolute;
+        text-indent:-90000px;
+        text-align:left !important;
+        white-space:nowrap;
+        overflow:hidden;
+    }
