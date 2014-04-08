@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var mongoose = require('../lib/database');
 
 var Creator = new mongoose.Schema({
 	name: String,
