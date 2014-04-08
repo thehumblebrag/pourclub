@@ -15,6 +15,7 @@ app.get('/', function (req, res) {
 app.get('/map', function (req, res) {
     res.render('map');
 });
+app.use('/public', express.static('public'));
 
 // JSON routes
 app.get('/pubs.json', routes.pub.all);
