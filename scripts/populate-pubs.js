@@ -1,25 +1,43 @@
-var Pub = require('../models/pub');
+var Pub = require('../models/pub')
+  , request = require('request')
+  , url = require('url');
 
-(new Pub({
-    name: 'Mechanics Institute',
-    location: {
-        latitude: -31.953004,
-        longitude: 115.857469
-    },
-    address: 'REAR 222 William St, Northbridge',
-    url: 'http://mechanicsinstitutebar.com.au/'
-})).save(function (err) {
-    console.log(err);
+// Generate 4sq API url
+var api_url = url.format({
+    protocol: 'https',
+    hostname: 'api.foursquare.com',
+    pathname: 'v2/venues/explore',
+    query: {
+        'client_id': 'FXNW4UTGKF5TKUN3TMAGSRUS2V4XZYXAV2PSXGT4MCEV1AH5',
+        'client_secret': '035ZZHW1I5YGDCEYWIUYCYXIJR5EZ4WQZVSFX2CVAHQGES32',
+        'v': 20130815,
+        'll': '-31.9460,115.8540',
+        'section': 'drinks',
+        'limit': 50
+    }
 });
 
-(new Pub({
-    name: 'The Village',
-    location: {
-        latitude: -31.947551,
-        longitude: 115.821669
-    },
-    address: '10-531 Hay Street Subiaco Village Subiaco WA 6008',
-    url: 'http://www.thevillagebar.com.au/'
-})).save(function (err) {
-    console.log(err);
+// Get 4sq results and add them to the database, without error or dupe checking
+request({ url: api_url, json: true }, function (err, resp, body) {
+    body.response.groups.forEach(function (group) {
+        group.items.forEach(function (item) {
+            // Add new record to the database
+            (new Pub({
+                name: item.venue.name,
+                location: {
+                    latitude: item.venue.location.lat,
+                    longitude: item.venue.location.lng
+                },
+                address: [
+                    item.venue.location.address,
+                    item.venue.location.city,
+                    item.venue.location.state,
+                    item.venue.location.postalCode
+                ].join(' '),
+                url: item.venue.url || ''
+            })).save(function (err) {
+                console.log(err);
+            });
+        });
+    })
 });
