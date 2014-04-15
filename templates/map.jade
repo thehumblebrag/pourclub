@@ -1,5 +1,6 @@
 extends base
 
 block content
-  .map
-    | Map goes here
+  #map(ng-controller='MapCtrl')
+    .google-map(google-map, style='width:100%;height:400px;')
+        span.loading Google Map to be loaded here
