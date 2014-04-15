@@ -13,7 +13,7 @@ module.exports.all = function (req, res) {
 
 module.exports.nearby = function (req, res) {
 
-    var latlng = req.query.l.split(',').map(Number);
+    var latlng = req.query.ll.split(',').map(Number);
     var geojsonPoint = { type: 'Point', coordinates: latlng.reverse() };
     var maxDistance = req.query.d || 5000;
 
