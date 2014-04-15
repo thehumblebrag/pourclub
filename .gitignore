@@ -29,3 +29,4 @@ public/vendor
 .DS_Store
 *.css
 *min.js
+.ruby-version
