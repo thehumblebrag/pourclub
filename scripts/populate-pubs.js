@@ -24,7 +24,7 @@ request({ url: api_url, json: true }, function (err, resp, body) {
             // Add new record to the database
             (new Pub({
                 name: item.venue.name,
-                location: [item.venue.location.lat, item.venue.location.lng],
+                location: [item.venue.location.lng, item.venue.location.lat],
                 address: [
                     item.venue.location.address,
                     item.venue.location.city,

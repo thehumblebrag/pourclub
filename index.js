@@ -23,4 +23,7 @@ app.get('/pub', function (req, res) {
 // JSON routes
 app.get('/pubs.json', routes.pub.all);
 
+// API
+app.get('/pubs/nearby', routes.pub.nearby);
+
 app.listen(3000);
