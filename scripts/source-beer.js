@@ -58,21 +58,3 @@ request({ url: getUrl('beers', {withBreweries: 'Y'}), json: true}, function (err
         }
     }
 });
-
-/*
-request({ url: getUrl('beers'), json: true }, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-        // Handle the first set of beers.
-        handleBeers(body.data);
-
-        // Now the rest of the pages.
-        var page = body.currentPage + 1;
-        for (var i = body.currentPage + 1; i < body.numberOfPages; i++) {
-            request({ url: getUrl('beers', { p: i }), json: true },
-                function (error, response, body) {
-                    handleBeers(body.data);
-                });
-        }
-    }
-});
-*/
