@@ -5,8 +5,8 @@ var mongoose = require('../lib/database');
 var schema = new mongoose.Schema({
     name: String,
     location: {
-        latitude: Number,
-        longitude: Number
+        type: [Number],
+        index: '2dsphere'
     },
     address: String,
     url: String

@@ -1,6 +1,6 @@
-var Pub = require('../models/pub')
-  , request = require('request')
-  , url = require('url');
+var Pub = require('../models/pub'),
+    request = require('request'),
+    url = require('url');
 
 // Generate 4sq API url
 var api_url = url.format({
@@ -24,10 +24,7 @@ request({ url: api_url, json: true }, function (err, resp, body) {
             // Add new record to the database
             (new Pub({
                 name: item.venue.name,
-                location: {
-                    latitude: item.venue.location.lat,
-                    longitude: item.venue.location.lng
-                },
+                location: [item.venue.location.lat, item.venue.location.lng],
                 address: [
                     item.venue.location.address,
                     item.venue.location.city,
@@ -39,5 +36,5 @@ request({ url: api_url, json: true }, function (err, resp, body) {
                 console.log(err);
             });
         });
-    })
+    });
 });
