@@ -13,11 +13,9 @@ tapthat.service('PubService', [function () {
     // Public
     return {
         'setCurrent': function (current) {
-            console.log('set-current');
             _current = current;
         },
         'getCurrent': function () {
-            console.log('get-current');
             return _current;
         }
     };

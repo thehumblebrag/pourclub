@@ -28,7 +28,7 @@ tapthat.directive('googleMap', ['PubService', function (PubService) {
             return false;
         }
         var marker = addGoogleMapMarker(map, // directive map
-                                        new google.maps.LatLng(pub.location.latitude, pub.location.longitude),
+                                        new google.maps.LatLng(pub.location[1], pub.location[0]),
                                         pub._id, // id
                                         pub.name, // title
                                         null // icon
