@@ -4,7 +4,7 @@
  * Google Maps directive for displaying a map and managing a
  * set of markers from the parent controller's scope.
  */
-tapthat.directive('googleMap', [function () {
+tapthat.directive('googleMap', ['PubService', function (PubService) {
 
     // Private
 
@@ -36,18 +36,18 @@ tapthat.directive('googleMap', [function () {
         // set the scope's current artist when it's clicked
         google.maps.event.addListener(marker, 'click', function () {
             $scope.$apply(function () {
-                $scope.setCurrent(pub);
+                PubService.setCurrent(pub);
             });
         });
         marker.pub = pub;
-    }
+    };
 
      var centerOnMarker = function (map, settings) {
-        var search_id = settings.id || false
-          , search_title = settings.title || false
-          , zoom = settings.zoom || false
-          , popup = settings.popup || false
-          , that = this;
+        var search_id = settings.id || false;
+        var search_title = settings.title || false;
+        var zoom = settings.zoom || false;
+        var popup = settings.popup || false;
+        var that = this;
         // Required settings not provided, return false and do nothing
         if (!search_id && !search_title) {
             return false;
