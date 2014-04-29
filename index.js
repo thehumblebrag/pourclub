@@ -5,6 +5,7 @@ var express = require('express')
 app.set('views', 'templates');
 app.set('view engine', 'jade');
 app.engine('jade', require('jade').__express);
+app.use(express.static(__dirname + '/public'));
 
 var routes = require('./routes');
 
@@ -15,7 +16,6 @@ app.get('/', function (req, res) {
 app.get('/map', function (req, res) {
     res.render('map');
 });
-app.use('/public', express.static('public'));
 app.get('/pub', function (req, res) {
 	res.render('pub');
 });
