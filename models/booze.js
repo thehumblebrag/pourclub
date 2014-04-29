@@ -1,10 +1,14 @@
 var mongoose = require('../lib/database');
 
-var Booze = new Schema({
+var schema = new mongoose.Schema({
 	name: String,
 	style: String,
-	image: ObjectId,
+	//image: ObjectId,
 	description: String,
 	abv: Number,
-	creator_id: [{ type: ObjectId, ref: 'Creator' }],
-  });
+    creator_name: String,
+	//creator_id: [{ type: ObjectId, ref: 'Creator' }],
+});
+
+var Booze = mongoose.model('Booze', schema);
+module.exports = Booze;
