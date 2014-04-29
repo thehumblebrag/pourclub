@@ -1,5 +1,16 @@
 var mongoose = require('../lib/database');
 
+// Schema options
+var schemaOptions = {
+    toObject: {
+        virtuals: true
+    },
+    toJSON: {
+        virtuals: true
+    }
+};
+
+
 // Schema
 var schema = new mongoose.Schema({
     name: String,
@@ -9,13 +20,13 @@ var schema = new mongoose.Schema({
     },
     address: String,
     url: String
-});
+}, schemaOptions);
 
 // Virtuals for longitude and latitude
-schema.virtual('location.latitude').get(function() {
+schema.virtual('latitude').get(function() {
     return this.location[1];
 });
-schema.virtual('location.longitude').get(function() {
+schema.virtual('longitude').get(function() {
     return this.location[0];
 });
 
