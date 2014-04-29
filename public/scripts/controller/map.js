@@ -32,7 +32,6 @@ tapthat.controller('MapCtrl', ['$scope', 'PubFactory', 'PubService', function ($
                         "lng": location.coords.longitude
                     };
                 });
-                console.log($scope.user_location);
             },
             function (error) {
                 console.log('error', error);
