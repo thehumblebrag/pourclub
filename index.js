@@ -10,7 +10,7 @@ app.use(express.static(__dirname + '/public'));
 var routes = require('./routes');
 
 // HTML routes
-app.get('/', function (req, res) {
+app.get('/fuck', function (req, res) {
     res.render('index');
 });
 app.get('/map', function (req, res) {
