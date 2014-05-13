@@ -5,8 +5,18 @@ block content
       #map(ng-controller='MapCtrl')
         .google-map(google-map, style='width:100%;height:400px;')
             span.loading Loading map...
-        section.current-pub.panel
+        section.panel
             h1 TapThat!
+            ul.header-nav.clearfix
+              li.action-twitter
+                a.flaticon-social19
+                  span.visual-hide tweet
+              li.action-facebook
+                a.flaticon-facebook5
+                  span.visual-hide facebook
+              li.action-email
+                a.flaticon-close13
+                  span.visual-hide email
             url {{current.url}}
             form
                 label(for='location') Tell me where you are:
