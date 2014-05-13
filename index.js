@@ -1,5 +1,5 @@
-var express = require('express')
-  , app = express();
+var express = require('express');
+var app = express();
 
 // Server configuration
 app.set('views', 'templates');
@@ -10,7 +10,7 @@ app.use(express.static(__dirname + '/public'));
 var routes = require('./routes');
 
 // HTML routes
-app.get('/fuck', function (req, res) {
+app.get('/', function (req, res) {
     res.render('index');
 });
 app.get('/map', function (req, res) {
@@ -22,6 +22,7 @@ app.get('/pub', function (req, res) {
 
 // JSON routes
 app.get('/pubs.json', routes.pub.all);
+app.get('/boozes.json', routes.booze.all);
 
 // API
 app.get('/pubs/nearby', routes.pub.nearby);
