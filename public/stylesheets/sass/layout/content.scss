@@ -7,10 +7,24 @@
 
 #site-content{
 }
-
-// Modernizr
-    // .no-flexbox{}
-
-// Responsive
-    // @media @tablet{}
-    // Set in settings.less
+.current-pub-wrapper {
+	background:linear-gradient(to bottom,#222,#000);
+	padding-top: 2px;
+	position: fixed;
+	bottom: 0;
+		width: 100%;
+}
+	.current-pub {
+		
+		padding: 20px;
+		box-sizing: border-box;
+		border-top: 1px dashed #555;
+		h1 {
+			font-family: 'Cantora One',serif;
+			font-size: 24px;
+			color: #fff;
+		}
+	}
+		.no-beers {
+			color: #ddd;
+		}
