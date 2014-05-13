@@ -1,27 +1,27 @@
 extends base
 
 block content
-  #map(ng-controller='MapCtrl')
-    .google-map(google-map, style='width:100%;height:400px;')
-      span.loading Google Map to be loaded here
-    section.current-pub
-      h1 {{current.name}}
-      url {{current.url}}
-      ul.beers(ng-if='beers')
-        li(ng-repeat='beer in beers')
-          {{beer.name}}
-      .no-beers(ng-if='current && !beers')
-        p No beers bro, rack 'em up?
-        form(ng-controller='BoozeAddrCtrl')
-          label(for='beer') Beer
-          input#beer(type='text', name='booze', ng-model='booze')
-          //- input(type='text', name='pub', ng-value='current.id')
-          button(type='button', ng-click='searchBoozes()') Search
-          ul.search-beers(ng-if='booze_recommendations')
-            li.beer(ng-repeat='beer in booze_recommendations')
-              .beer-name {{beer.name}}
-              .beer-style {{beer.style}}
-              .beer-creator {{beer.creator_name}}
-              .beer-actions
-                button(ng-click='saveBeerToPub(beer)') Drank
-          button(type='submit') Add beer
+  .width-container
+    #map(ng-controller='MapCtrl')
+      .google-map(google-map, style='width:100%;height:400px;')
+        span.loading Loading map...
+      section.current-pub
+        h1 {{current.name}}
+        url {{current.url}}
+        ul.beers(ng-if='beers')
+          li(ng-repeat='beer in beers')
+            {{beer.name}}
+        .no-beers(ng-if='current && !beers')
+          p No beers bro, rack 'em up?
+          form(ng-controller='BoozeAddrCtrl')
+            label(for='beer') Beer
+            input#beer(type='text', name='booze', ng-model='booze')
+            button(type='button', ng-click='searchBoozes()') Search
+            ul.search-beers(ng-if='booze_recommendations')
+              li.beer(ng-repeat='beer in booze_recommendations')
+                .beer-name {{beer.name}}
+                .beer-style {{beer.style}}
+                .beer-creator {{beer.creator_name}}
+                .beer-actions
+                  button(ng-click='saveBeerToPub(beer)') Drank
+            button(type='submit') Add beer
