@@ -25,3 +25,13 @@ block content
                 .beer-actions
                   button(ng-click='saveBeerToPub(beer)') Drank
             button(type='submit') Add beer
+    section.panel
+        .inner
+            h1 TapThat!
+            #quick-links
+                a(src='') open/close
+                a(src='') search
+            form
+                label(for='location') Tell me where you are:
+                input#location(type='text')
+                button(type='submit') Go!
