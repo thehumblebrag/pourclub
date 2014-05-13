@@ -8,16 +8,17 @@
  * For usage information see README.md for this project.
  */
 
-var gulp = require('gulp')
-  , gutil = require('gulp-util');
+var gulp = require('gulp');
+var gutil = require('gulp-util');
 
 // Plugins
-var compass = require('gulp-compass')
-  , jshint = require('gulp-jshint-cached')
-  , autoprefixer = require('gulp-autoprefixer')
-  , clean = require('gulp-clean')
-  , concat = require('gulp-concat')
-  , uglify = require('gulp-uglify');
+var compass = require('gulp-compass');
+var jshint = require('gulp-jshint-cached');
+var autoprefixer = require('gulp-autoprefixer');
+var clean = require('gulp-clean');
+var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
+var plumber = require('gulp-plumber');
 
 // Configuration
 var config = {
@@ -42,6 +43,7 @@ gulp.task('lint', function () {
 // Compile modularized SCSS into single CSS stylesheet
 gulp.task('compass', function () {
     gulp.src(config.stylesheets + '/sass/styles.scss')
+        .pipe(plumber())
         .pipe(compass({
             css: config.stylesheets,
             sass: config.stylesheets + '/sass',
@@ -59,6 +61,7 @@ gulp.task('scripts', function () {
                config.vendor + '/angular-eyesight/angular-eyesight.js',
                config.scripts + '/**/*.js',
                '!' + config.scripts + '/**/*min.js'])
+        .pipe(plumber())
         .pipe(concat('all.min.js'))
         .pipe(gulp.dest(config.scripts));
 });
