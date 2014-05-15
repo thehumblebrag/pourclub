@@ -25,7 +25,7 @@ var config = {
     stylesheets: './public/stylesheets',
     scripts: './public/scripts',
     vendor: './public/vendor',
-}
+};
 
 // Remove all existing compiled files
 gulp.task('clean', function () {
@@ -35,7 +35,13 @@ gulp.task('clean', function () {
 
 // Find Javascript errors and bugs
 gulp.task('lint', function () {
-    gulp.src([config.scripts + '/*.js', '!' + config.scripts + '/*-min.js'])
+    gulp.src(['./**/*.js',
+              // ignore compiled code
+              '!' + config.scripts + '/*-min.js',
+              '!' + config.vendor + '/**/*.js',
+              // ignore vendor code
+              '!./lib/**/*.js',
+              '!./node_modules/**/*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
