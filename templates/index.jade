@@ -9,8 +9,7 @@ block content
         h1 {{current.name}}
         url {{current.url}}
         ul.beers(ng-if='beers')
-          li(ng-repeat='beer in beers')
-            {{beer.name}}
+          li(ng-repeat='beer in beers') {{beer.name}}
         .no-beers(ng-if='current && !beers')
           p No beers bro, rack 'em up?
           form(ng-controller='BoozeAddrCtrl')
