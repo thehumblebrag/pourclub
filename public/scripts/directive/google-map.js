@@ -93,7 +93,7 @@ tapthat.directive('googleMap', ['PubService', function (PubService) {
                 if (location) {
                     google_map.panTo(new google.maps.LatLng(location.lat, location.lng));
                 }
-            })
+            });
         }
     };
 

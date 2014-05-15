@@ -10,7 +10,6 @@ var schemaOptions = {
     }
 };
 
-
 // Schema
 var schema = new mongoose.Schema({
     name: String,
