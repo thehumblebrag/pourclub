@@ -7,7 +7,7 @@
  * - ngResource
  */
 tapthat.factory('PubFactory', ['$resource', function ($resource) {
-    return $resource('/pubs.json', {}, {
+    return $resource('/api/pub', {}, {
         'query': { 'method': 'GET', 'isArray': true }
     });
 }]);

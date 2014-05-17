@@ -13,18 +13,14 @@ var routes = require('./routes');
 app.get('/', function (req, res) {
     res.render('index');
 });
-app.get('/map', function (req, res) {
-    res.render('map');
-});
-app.get('/pub', function (req, res) {
-	res.render('pub');
-});
 
-// JSON routes
-app.get('/pubs.json', routes.pub.all);
-app.get('/boozes.json', routes.booze.all);
+// Pub API
+app.get   ('/api/pub',     routes.pub.list);
+// app.get   ('/api/pub/:id', routes.pub.get);
+// app.delete('/api/pub/:id', routes.pub.delete);
+// app.post  ('/api/pub',     routes.pub.save);
 
-// API
-app.get('/pubs/nearby', routes.pub.nearby);
+// Beer API
+// app.get('/boozes.json', routes.booze.list);
 
 app.listen(3000);

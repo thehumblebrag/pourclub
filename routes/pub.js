@@ -1,6 +1,18 @@
+/**
+ * Routes: Pub
+ *
+ * CRUD based routes to handle user interaction of
+ * TapThat pub listings.
+ */
+
 var Pub = require('../models/pub');
 
-module.exports.all = function (req, res) {
+// Crud routes
+
+module.exports.list = function (req, res) {
+    if (req.query.ll) {
+        return module.exports.listByLocation(req, res);
+    }
     Pub.find(function (err, pubs) {
         if (err) {
             return console.error(err);
@@ -9,16 +21,33 @@ module.exports.all = function (req, res) {
     });
 };
 
-module.exports.nearby = function (req, res) {
-    var latlng = req.query.ll.split(',').map(Number);
-    var geojson_point = { type: 'Point', coordinates: latlng.reverse() };
-    var max_distance = req.query.d || 5000;
-    var near_params = {
+module.exports.get = function (req, res) {
+
+};
+
+module.exports.save = function (req, res) {
+
+};
+
+module.exports.delete = function (req, res) {
+
+};
+
+// Helper methods
+
+module.exports.listByLocation = function (req, res) {
+    var ll = req.query.ll.split(',').map(Number);
+    var radius = req.query.r || 500;
+    var point = {
+        type: 'Point',
+        coordinates: ll.reverse()
+    };
+    var options = {
         spherical: true,
-        max_distance: max_distance / 6378137,
+        maxDistance: radius / 6378137,
         distanceMultiplier: 6378137
     };
-    Pub.geoNear(geojson_point, near_params, function(err, data) {
-        res.send(data);
+    Pub.geoNear(point, options, function (err, pubs) {
+        return res.json(pubs);
     });
 };
