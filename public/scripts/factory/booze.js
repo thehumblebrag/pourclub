@@ -7,7 +7,8 @@
  * - ngResource
  */
 tapthat.factory('BoozeFactory', ['$resource', function ($resource) {
-    return $resource('/boozes.json', {}, {
-        get: { 'method': 'GET', 'isArray': true }
+    return $resource('/api/booze/:booze_id', {}, {
+        'query': { 'method': 'GET', 'isArray': true },
+        'update': { method: 'PUT' }
     });
 }]);

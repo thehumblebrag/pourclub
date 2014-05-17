@@ -9,7 +9,17 @@ var Pub = require('../models/pub');
 
 // Crud routes
 
-module.exports.list = function (req, res) {
+module.exports.param = function (req, res, next, pub_id) {
+    Pub.findById(pub_id, function (err, pub) {
+        if (err) {
+            return console.error(err);
+        }
+        req.node = pub[0];
+        next();
+    });
+};
+
+module.exports.list = function (req, res, next) {
     if (req.query.ll) {
         return module.exports.listByLocation(req, res);
     }
@@ -21,16 +31,20 @@ module.exports.list = function (req, res) {
     });
 };
 
-module.exports.get = function (req, res) {
-
+module.exports.get = function (req, res, next) {
+    res.json(req.node);
 };
 
 module.exports.save = function (req, res) {
-
+    res.json({ err: false });
 };
 
-module.exports.delete = function (req, res) {
+module.exports.delete = function (req, res, next) {
+    req.node.remove();
+};
 
+module.exports.update = function (req, res, next) {
+    res.json({ err: false });
 };
 
 // Helper methods
