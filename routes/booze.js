@@ -24,7 +24,6 @@ module.exports.list = function (req, res, next) {
     var limit = req.query.limit || 5;
     var filter = {};
     if (search) {
-        console.log('search', search);
         filter = {
             name: new RegExp(search, 'i')
         };

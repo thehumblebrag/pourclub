@@ -33,7 +33,7 @@ tapthat.directive('googleMap', ['PubService', function (PubService) {
                                         pub.name, // title
                                         null // icon
                                         );
-        // set the scope's current artist when it's clicked
+        // Set current to service when clicked
         google.maps.event.addListener(marker, 'click', function () {
             $scope.$apply(function () {
                 PubService.setCurrent(pub);
