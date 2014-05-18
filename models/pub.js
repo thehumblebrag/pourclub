@@ -1,7 +1,15 @@
+/**
+ * Model: Pub
+ *
+ * Represent a single location and a list of drinks that are
+ * available at this location.
+ */
+
 var mongoose = require('../lib/database');
+var ObjectId = mongoose.SchemaTypes.ObjectId;
 
 // Schema options
-var schemaOptions = {
+var options = {
     toObject: {
         virtuals: true
     },
@@ -18,8 +26,12 @@ var schema = new mongoose.Schema({
         index: '2dsphere'
     },
     address: String,
-    url: String
-}, schemaOptions);
+    url: String,
+    boozes: [{
+        type: ObjectId,
+        ref: 'Booze'
+    }],
+}, options);
 
 // Virtuals for longitude and latitude
 schema.virtual('latitude').get(function() {

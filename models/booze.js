@@ -11,4 +11,5 @@ var schema = new mongoose.Schema({
 });
 
 var Booze = mongoose.model('Booze', schema);
+
 module.exports = Booze;

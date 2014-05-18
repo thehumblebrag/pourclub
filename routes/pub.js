@@ -10,13 +10,15 @@ var Pub = require('../models/pub');
 // Crud routes
 
 module.exports.param = function (req, res, next, pub_id) {
-    Pub.findById(pub_id, function (err, pub) {
-        if (err) {
-            return console.error(err);
-        }
-        req.node = pub[0];
-        next();
-    });
+    Pub.findById(pub_id)
+        .populate('boozes')
+        .exec(function (err, pub) {
+            if (err) {
+                return console.error(err);
+            }
+            req.node = pub;
+            next();
+        });
 };
 
 module.exports.list = function (req, res, next) {
@@ -44,10 +46,26 @@ module.exports.delete = function (req, res, next) {
 };
 
 module.exports.update = function (req, res, next) {
-    res.json({ err: false });
+    // Mongo only supports list of IDs so clear the cruft
+    req.body.boozes = req.body.boozes.map(function (booze) {
+        return booze._id;
+    });
+    Pub.findByIdAndUpdate(req.node._id, _sanatizeForUpdate(req.body), function (err, data) {
+        if (err) {
+            console.error(err);
+        }
+        res.json({ err: err });
+    });
 };
 
 // Helper methods
+
+var _sanatizeForUpdate = function (doc) {
+    delete doc._id;
+    delete doc.id;
+    delete doc.__v;
+    return doc;
+};
 
 module.exports.listByLocation = function (req, res) {
     var ll = req.query.ll.split(',').map(Number);
