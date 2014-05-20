@@ -5,87 +5,29 @@
 * does not include layout or view specific style
 */
 
-#site-content{
-
-}
-
-
 #map {
-	position: absolute; // i want this to be position relative...
-	top: 0;
-	height: 100%;		// ...but map disappears when using % heights. FIX LATER
-	width: 100%;
-	margin: 0;
-	padding: 0;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+    .google-map{
+        width:100%;
+        height:100%;
+    }
 }
 
-
-#quick-links {
-
-}
-
-#social {
-	ul {
-		padding: 6px;
-		position: relative;
-		height:36px;
-		width: 120px;
-		margin: 20px auto 0;
-		background:#222;
-		box-sizing:border-box;
-		border-radius:6px;
-		border-bottom:1px solid #222;
-		border-top:1px solid #444;
-	}
-		li {
-			color: #fff;
-			display:block;
-			list-style-type: none;
-			position: absolute;
-			box-shadow: 0px 1px 1px #000;
-		}
-			.action-twitter {
-				left: 10px;
-				a:before {
-					font-size: 16px;
-					padding-top:1px;
-				}
-			}
-			.action-facebook {
-				left: 50%;
-				margin-left: -12px;
-				a:before {
-					font-size: 16px;
-					padding-top:1px;
-				}
-			}
-			.action-email {
-				right: 10px;
-				a:before {
-					font-size: 12px;
-					padding-top:1px;
-				}
-			}
-}
-
-.current-pub-wrapper {
-	background:linear-gradient(to bottom,#222,#000);
-	padding-top: 2px;
-	position: fixed;
-	bottom: 0;
-		width: 100%;
-}
-	.current-pub {
-
-		padding: 20px;
-		box-sizing: border-box;
-		border-top: 1px dashed #555;
-		h1 {
-			font-family: 'Cantora One',serif;
-			font-size: 24px;
-			color: #fff;
-		}
-	}
-		.no-beers {
-			color: #ddd;
-		}
+    .current-pub{
+        box-sizing:border-box;
+        z-index:1;
+        position:fixed;
+        left:50%;
+        bottom:0px;
+        width:300px;
+        margin-left:-150px;
+        padding:20px;
+        color:$white;
+        background:$black;
+    }
