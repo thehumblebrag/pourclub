@@ -4,7 +4,7 @@
  * Google Maps directive for displaying a map and managing a
  * set of markers from the parent controller's scope.
  */
-tapthat.directive('googleMap', ['PubService', function (PubService) {
+tapthat.directive('googleMap', ['PubService', 'LocationService', function (PubService, LocationService) {
 
     // Private
 
@@ -80,16 +80,17 @@ tapthat.directive('googleMap', ['PubService', function (PubService) {
                 navigationControl: false,
                 mapTypeControl: false
             });
-            // When artists are added, then show them on the map
+            // When pubs are added, show them on the map.
+            // @TODO this is super confusing it's coming from the PubCtrl.. duh
             $scope.$watch('pubs', function (pubs) {
                 if (pubs.length) {
                     angular.forEach(pubs, function (pub, key) {
-                        pubs._id = key; // give it a unique id for checking
+                        pubs._id = key;
                         mapLocation($scope, google_map, pub);
                     });
                 }
             });
-            $scope.$watch('user_location', function (location) {
+            $scope.$watch(function () { return LocationService.getLocation(); }, function (location) {
                 if (location) {
                     google_map.panTo(new google.maps.LatLng(location.lat, location.lng));
                 }
