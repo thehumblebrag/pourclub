@@ -1,7 +1,7 @@
 var url = require('url');
 var request = require('request');
 var _ = require('underscore');
-var api_key = 'KEY_HERE';
+var api_key = '0260f71fbc7bade0abd43a3aec7ef348';
 var api_url = 'api.brewerydb.com';
 
 var Booze = require('../models/booze');
@@ -22,13 +22,13 @@ function getUrl(method, params) {
 
 function handleBeers(beers) {
     beers.forEach(function (beer) {
-        console.log('Saving beer: ' + beer.name);
         var new_beer = new Booze({
             name: beer.name,
             style: beer.style && beer.style.name,
             description: beer.description,
             abv: beer.abv,
-            creator_name: beer.breweries && beer.breweries[0].name
+            creator_name: beer.breweries && beer.breweries[0].name,
+            image: beer.labels && beer.labels.large
         });
         new_beer.save(function (err) {
             if (err) {
@@ -50,7 +50,7 @@ request({ url: getUrl('beers', { withBreweries: 'Y' }), json: true}, function (e
         console.error(error);
     }
     else if (body.status == 'failure') {
-        console.error(body.errorMessage);
+        console.error('Error:', body.errorMessage);
     }
     else if (response.statusCode == 200) {
         // This is the first beer list, so handle it anyway.

@@ -21,6 +21,7 @@ block content
               .beer-name {{beer.name}}
               .beer-style {{beer.style}}
               .beer-creator {{beer.creator_name}}
+              img.beer-label(ng-src="{{beer.image}}", alt="{{beer.name}} label")
               .beer-actions
                 button(ng-click="saveBeerToPub(beer)") Drank
               button(type="submit") Add beer
