@@ -8,16 +8,18 @@
 	z-index:1;
     position:fixed;
     top:0;
-    left:50%;
-    width:200px;
-    margin-left:-100px;
+    left: 50%;
+    width:300px;
+    margin-left: -150px;
     background:$black;
     color:$white;
 	.inner {
 		padding:20px;
-		border:1px dashed #555;
         border-top:0;
 	}
+    .logo {
+        
+    }
 }
 
 // Modernizr

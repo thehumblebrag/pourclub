@@ -7,8 +7,6 @@
 form {
     margin:0;
 	padding:0;
-	border-bottom:1px solid #333;
-	padding-bottom:20px;
 }
 label {
 	margin:0;
@@ -18,13 +16,22 @@ label {
 input,
 button {
     box-sizing:border-box;
-    width:100%;
     height:30px;
-    width:100%;
     margin:0.5em 0;
     padding:0 0.25em;
     border:0;
     text-align:center;
     color:$black;
     background:$white;
+    display: inline-block;
+}
+input {
+    width: auto;
+}
+button {
+    &.search-button {
+        float: right;
+        width: 70px;
+        border-left: solid 1px $gray;
+    }
 }
