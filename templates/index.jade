@@ -3,7 +3,7 @@ extends base
 block content
   .width-container
     #map(ng-controller='MapCtrl')
-      .google-map(google-map, style='width:100%;height:400px;')
+      .google-map(google-map)
         span.loading Loading map...
       section.current-pub
         h1 {{current.name}}
