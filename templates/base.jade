@@ -2,25 +2,27 @@ doctype html
 html(lang="en", ng-app="tapthat")
   head
     title Tap That
-    link(rel='stylesheet',href='/stylesheets/styles.css')
-    script(src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.15/angular.min.js')
-    script(src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.15/angular-resource.min.js')
-    script(src='//maps.google.com/maps/api/js?sensor=false')
-    script(src='/scripts/app.js')
-    script(src='/scripts/factory/pub.js')
-    script(src='/scripts/factory/booze.js')
-    script(src='/scripts/service/pub.js')
-    script(src='/scripts/controller/map.js')
-    script(src='/scripts/controller/booze-addr.js')
-    script(src='/scripts/directive/google-map.js')
+    link(rel="stylesheet", href="/stylesheets/styles.css")
+    script(src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.15/angular.min.js")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.15/angular-resource.min.js")
+    script(src="//maps.google.com/maps/api/js?sensor=false")
+    script(src="/scripts/app.js")
+    script(src="/scripts/factory/pub.js")
+    script(src="/scripts/factory/booze.js")
+    script(src="/scripts/service/pub.js")
+    script(src="/scripts/service/location.js")
+    script(src="/scripts/controller/location.js")
+    script(src="/scripts/controller/map.js")
+    script(src="/scripts/controller/booze-addr.js")
+    script(src="/scripts/directive/google-map.js")
   body
     #site-header
       .inner
         h1.logo Tap That!
         p See what's on tap in:
-        form
+        form#location-search(ng-controller="LocationCtrl", ng-submit="findLocation()")
           label
             span.visual-hide Where are you?
-            input(type='text', placeholder='Mt Lawley')
-            button(type='submit').search-button Search
+            input(type="text", ng-model="location_search", placeholder="Mt Lawley")
+            button(type="submit") Search
     block content
