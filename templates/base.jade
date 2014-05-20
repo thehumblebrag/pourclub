@@ -18,8 +18,8 @@ html(lang="en", ng-app="tapthat")
   body
     #site-header
       .inner
-        h1 Tap That!
-        p Tell us where you are; we'll tell you what's on tap.
+        h1.logo Tap That!
+        p See what's on tap in:
         form#location-search(ng-controller="LocationCtrl", ng-submit="findLocation()")
           label
             span.visual-hide Where are you?

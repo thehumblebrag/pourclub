@@ -4,9 +4,20 @@
  * Common typography styles for HTML elemetns
  */
 
+// base measure
+$font-size: 16;
+
+// heading font
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:700);
+$font-heading: 'Roboto Slab', serif;
+
+// body font
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300);
+$font-body: 'Open Sans', sans-serif;
+
 // paragraph
 body{
-    font-family:$font-default;
+    font-family:$font-body;
     font-size:$font-size;
     font-weight:200;
     line-height:1.4em;
@@ -29,12 +40,13 @@ h1,
 h2,
 h3,
 h4{
+    font-family:$font-heading;
     font-weight:600;
-    color:$white;
+    color:$yellow;
 }
 
     h1{
-        font-size:3em;
+        font-size:1em;
         line-height:1.1em;
         margin:0;
     }
