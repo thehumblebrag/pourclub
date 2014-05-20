@@ -2,25 +2,36 @@ extends base
 
 block content
   .width-container
-    #map(ng-controller='MapCtrl')
+    #map(ng-controller="MapCtrl")
       .google-map(google-map)
         span.loading Loading map...
-      section.current-pub
+      section.current-pub(ng-if="current")
         h1 {{current.name}}
         url {{current.url}}
-        ul.beers(ng-if='current.boozes')
-          li(ng-repeat='beer in current.boozes') {{beer.name}}
-        .no-beers(ng-if='!current.boozes')
+        ul.beers(ng-if="current.boozes")
+          li(ng-repeat="beer in current.boozes") {{beer.name}}
+        .no-beers(ng-if="!current.boozes")
           p No beers bro, rack 'em up?
-        form(ng-controller='BoozeAddrCtrl')
-          label(for='beer') Find Beer
-          input#beer(type='text', name='booze', placeholder="Coopers Pale Ale", ng-model='booze_search')
-          button(type='button', ng-click='searchBoozes()') Search
-          ul.search-beers(ng-if='booze_recommendations')
-            li.beer(ng-repeat='beer in booze_recommendations')
+        form(ng-controller="BoozeAddrCtrl")
+          label(for="beer") Find Beer
+          input#beer(type="text", name="booze", placeholder="Coopers Pale Ale", ng-model="booze_search")
+          button(type="button", ng-click="searchBoozes()") Search
+          ul.search-beers(ng-if="booze_recommendations")
+            li.beer(ng-repeat="beer in booze_recommendations")
               .beer-name {{beer.name}}
               .beer-style {{beer.style}}
               .beer-creator {{beer.creator_name}}
               .beer-actions
-                button(ng-click='saveBeerToPub(beer)') Drank
-          button(type='submit') Add beer
+                button(ng-click="saveBeerToPub(beer)") Drank
+          button(type="submit") Add beer
+        .current-beer(ng-click="close()") Close
+    section.panel
+      .inner
+        h1 TapThat!
+        #quick-links
+          a(src="#") open/close
+          a(src="#") search
+        form
+          label(for="location") Tell me where you are:
+          input#location(type="text")
+          button(type="submit") Go!
