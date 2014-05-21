@@ -1,40 +1,35 @@
-var Pub = require('../models/pub'),
-    request = require('request'),
-    url = require('url');
+var async = require('async');
+var places = require('../lib/places');
+var argv = process.argv.slice(2);
 
-// Generate 4sq API url
-var api_url = url.format({
-    protocol: 'https',
-    hostname: 'api.foursquare.com',
-    pathname: 'v2/venues/explore',
-    query: {
-        'client_id': 'FXNW4UTGKF5TKUN3TMAGSRUS2V4XZYXAV2PSXGT4MCEV1AH5',
-        'client_secret': '035ZZHW1I5YGDCEYWIUYCYXIJR5EZ4WQZVSFX2CVAHQGES32',
-        'v': 20130815,
-        'll': '-31.9460,115.8540',
-        'section': 'drinks',
-        'limit': 50
+if (argv.length !== 2) {
+    console.error('Bad arguments. Please use `bin/source-pubs.js {lat} {lng}`');
+    process.exit(1);
+}
+
+var lat = argv[0];
+var lng = argv[1];
+
+console.log("Searching for Pubs near", [lat, lng].join(','));
+
+places.nearLocation(lat, lng, function (err, pubs) {
+    if (err) {
+        return console.error(err);
     }
-});
-
-// Get 4sq results and add them to the database, without error or dupe checking
-request({ url: api_url, json: true }, function (err, resp, body) {
-    body.response.groups.forEach(function (group) {
-        group.items.forEach(function (item) {
-            // Add new record to the database
-            (new Pub({
-                name: item.venue.name,
-                location: [item.venue.location.lng, item.venue.location.lat],
-                address: [
-                    item.venue.location.address,
-                    item.venue.location.city,
-                    item.venue.location.state,
-                    item.venue.location.postalCode
-                ].join(' '),
-                url: item.venue.url || ''
-            })).save(function (err) {
-                console.log(err);
-            });
+    async.each(pubs, function (pub, next) {
+        pub.save(function (err, result) {
+            if (err) {
+                next(err);
+            }
+            console.log("+ added", pub.name);
+            next();
         });
+    }, function (err) {
+        if (err) {
+            console.error(err);
+            process.exit(1);
+        }
+        console.log('Done yo. Imported', pubs.length, 'new pubs.');
+        process.exit();
     });
 });
