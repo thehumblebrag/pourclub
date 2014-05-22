@@ -10,7 +10,7 @@ if (argv.length !== 2) {
 var lat = argv[0];
 var lng = argv[1];
 
-console.log("Searching for Pubs near", [lat, lng].join(','));
+console.log('Searching for Pubs near', [lat, lng].join(','));
 
 places.nearLocation(lat, lng, function (err, pubs) {
     if (err) {
@@ -21,7 +21,7 @@ places.nearLocation(lat, lng, function (err, pubs) {
             if (err) {
                 next(err);
             }
-            console.log("+ added", pub.name);
+            console.log('+ added', pub.name);
             next();
         });
     }, function (err) {

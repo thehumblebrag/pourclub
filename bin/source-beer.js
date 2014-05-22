@@ -1,13 +1,16 @@
 var url = require('url');
 var request = require('request');
 var _ = require('underscore');
-var api_key = '0260f71fbc7bade0abd43a3aec7ef348';
+
+// Script configuration
+var config = require('../config');
+var api_key = config.brewerydb.api_key;
 var api_url = 'api.brewerydb.com';
 
 var Booze = require('../models/booze');
 var Creator = require('../models/creator');
 
-function getUrl(method, params) {
+var getUrl = function (method, params) {
     var apiParams = {
         key: api_key,
         format: 'json'
@@ -18,9 +21,9 @@ function getUrl(method, params) {
         pathname: 'v2/' + method,
         query: _.extend(apiParams, params)
     });
-}
+};
 
-function handleBeers(beers) {
+var handleBeers = function (beers) {
     beers.forEach(function (beer) {
         var new_beer = new Booze({
             name: beer.name,
@@ -32,22 +35,23 @@ function handleBeers(beers) {
         });
         new_beer.save(function (err) {
             if (err) {
-                console.log(err);
+                return console.error(err);
             }
+            console.log('+ added', new_beer.name);
         });
     });
-}
+};
 
-function getPageOfBeer(pageNumber) {
-    request({ url: getUrl('beers', { p: pageNumber }), json: true }, function (error, response, body) {
+var getPageOfBeer = function (page) {
+    request({ url: getUrl('beers', { p: page }), json: true }, function (err, response, body) {
         handleBeers(body.data);
     });
-}
+};
 
-request({ url: getUrl('beers', { withBreweries: 'Y' }), json: true}, function (error, response, body) {
+request({ url: getUrl('beers', { withBreweries: 'Y' }), json: true}, function (err, response, body) {
     // Do this to get the total pages of beer.
-    if (error) {
-        console.error(error);
+    if (err) {
+        console.error(err);
     }
     else if (body.status == 'failure') {
         console.error('Error:', body.errorMessage);

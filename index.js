@@ -1,5 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var config = require('./config');
+
 var app = express();
 
 // Server configuration
@@ -36,4 +38,6 @@ app.route('/api/booze/:booze_id')
     .put(routes.booze.update)
     .delete(routes.booze.delete);
 
-app.listen(3000);
+app.listen(process.env.PORT || config.port, function () {
+    console.log('Ready to tap that');
+});
