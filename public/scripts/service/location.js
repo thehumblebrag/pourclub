@@ -11,12 +11,12 @@ tapthat.service('LocationService', [function () {
             _location = lat;
         }
         else {
-            _location = { lat: lat, lng: lng }
+            _location = { lat: lat, lng: lng };
         }
     };
     var getLocation = function () {
         return _location;
-    }
+    };
     var setLocationByString = function (location) {
         geocoder = new google.maps.Geocoder();
         geocoder.geocode({ 'address': location }, function (results, status) {
@@ -28,7 +28,7 @@ tapthat.service('LocationService', [function () {
                 window.console.log('Geocode was not successful for the following reason: ' + status);
             }
         });
-    }
+    };
     return {
         setLocation: setLocation,
         setLocationByString: setLocationByString,

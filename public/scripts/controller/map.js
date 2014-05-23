@@ -6,34 +6,43 @@
  * Requirements:
  * - nil
  */
-tapthat.controller('MapCtrl', ['$scope', 'PubFactory', 'PubService', function ($scope, PubFactory, PubService) {
+tapthat.controller('MapCtrl', ['$scope', 'PubFactory', 'PubService', 'LocationService', function ($scope, PubFactory, PubService, LocationService) {
     // Private
+
     // Public
     $scope.pubs = [];
-    PubFactory.query(function (data) {
-        $scope.pubs = data;
-    });
+
     $scope.close = function () {
         PubService.setCurrent(null);
     };
-    $scope.user_location = null;
-    $scope.$watch(PubService.getCurrent, function (new_value, old_value) {
-        $scope.current = new_value;
-    });
+
+    // Set initial location to where user currently is
     if ('geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition(
             function (location) {
                 $scope.$apply(function () {
-                    $scope.user_location = {
-                        "lat": location.coords.latitude,
-                        "lng": location.coords.longitude
-                    };
+                    LocationService.setLocation(location.coords.latitude,
+                                                location.coords.longitude);
                 });
             },
             function (error) {
-                console.log('error', error);
+                console.error('error', error);
             }
         );
     }
+
+    // Update selected pub when changed
+    $scope.$watch(PubService.getCurrent, function (pub) {
+        $scope.current = pub;
+    });
+
+    // Update pubs to show anytime the user changes location
+    $scope.$watch(function () { return LocationService.getLocation(); }, function (location) {
+        if (location) {
+            PubFactory.query({ ll: [location.lat, location.lng].join(',') }, function (data) {
+                $scope.pubs = data;
+            });
+        }
+    });
 
 }]);
