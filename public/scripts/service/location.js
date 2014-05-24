@@ -2,10 +2,10 @@
  * Service: Location
  * Track the current user's location and search focus.
  */
-tapthat.service('LocationService', [function () {
-    // Private
+tapthat.service('LocationService', [
+'PubService',
+function (PubService) {
     var _location = null;
-    // Public
     var setLocation = function (lat, lng) {
         if (typeof lat === "object") {
             _location = lat;
@@ -13,6 +13,7 @@ tapthat.service('LocationService', [function () {
         else {
             _location = { lat: lat, lng: lng };
         }
+        PubService.updateListByLocation(_location);
     };
     var getLocation = function () {
         return _location;
@@ -25,7 +26,7 @@ tapthat.service('LocationService', [function () {
                             results[0].geometry.location.lng());
             }
             else {
-                window.console.log('Geocode was not successful for the following reason: ' + status);
+                console.log('Geocode was not successful for the following reason: ' + status);
             }
         });
     };

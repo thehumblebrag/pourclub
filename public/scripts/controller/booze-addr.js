@@ -6,10 +6,9 @@
  * Requirements:
  * - nilpmap
  */
-tapthat.controller('BoozeAddrCtrl', ['$scope', 'PubFactory', 'PubService', 'BoozeFactory', function ($scope, PubFactory, PubService, BoozeFactory) {
-    // Private
-
-    // Public
+tapthat.controller('BoozeAddrCtrl', [
+'$scope', 'PubFactory', 'PubService', 'BoozeFactory',
+function ($scope, PubFactory, PubService, BoozeFactory) {
     $scope.booze_search = null;
     $scope.booze_recommendations = [];
     // Search for beers by user provided string

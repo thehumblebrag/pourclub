@@ -4,12 +4,10 @@
  * Google Maps directive for displaying a map and managing a
  * set of markers from the parent controller's scope.
  */
-tapthat.directive('googleMap', ['PubService', 'LocationService', function (PubService, LocationService) {
-
-    // Private
-
+tapthat.directive('googleMap', [
+'PubService', 'LocationService',
+function (PubService, LocationService) {
     var _markers = [];
-
     var addGoogleMapMarker = function (map, position, id, title, icon) {
         var marker = new google.maps.Marker({
                 map: map,
@@ -22,17 +20,12 @@ tapthat.directive('googleMap', ['PubService', 'LocationService', function (PubSe
         _markers.push(marker);
         return marker;
     };
-
     var mapLocation = function ($scope, map, pub) {
         if (pub.latitude === null || pub.longitude === null) {
             return false;
         }
-        var marker = addGoogleMapMarker(map, // directive map
-                                        new google.maps.LatLng(pub.latitude, pub.longitude),
-                                        pub._id, // id
-                                        pub.name, // title
-                                        null // icon
-                                        );
+        var latlng = new google.maps.LatLng(pub.latitude, pub.longitude);
+        var marker = addGoogleMapMarker(map, latlng, pub._id, pub.name);
         // Set current to service when clicked
         google.maps.event.addListener(marker, 'click', function () {
             $scope.$apply(function () {
@@ -41,8 +34,7 @@ tapthat.directive('googleMap', ['PubService', 'LocationService', function (PubSe
         });
         marker.pub = pub;
     };
-
-     var centerOnMarker = function (map, settings) {
+    var centerOnMarker = function (map, settings) {
         var search_id = settings.id || false;
         var search_title = settings.title || false;
         var zoom = settings.zoom || false;
@@ -65,9 +57,6 @@ tapthat.directive('googleMap', ['PubService', 'LocationService', function (PubSe
             }
         });
     };
-
-    // Public
-
     return {
         restrict: 'A',
         link: function ($scope, element, attr) {
@@ -80,9 +69,8 @@ tapthat.directive('googleMap', ['PubService', 'LocationService', function (PubSe
                 navigationControl: false,
                 mapTypeControl: false
             });
-            // When pubs are added, show them on the map.
-            // @TODO this is super confusing it's coming from the PubCtrl.. duh
-            $scope.$watch('pubs', function (pubs) {
+            // When pubs are added, show them on the map
+            $scope.$watch(function () { return PubService.getList(); }, function (pubs) {
                 if (pubs.length) {
                     angular.forEach(pubs, function (pub, key) {
                         pubs._id = key;
@@ -97,5 +85,4 @@ tapthat.directive('googleMap', ['PubService', 'LocationService', function (PubSe
             });
         }
     };
-
 }]);

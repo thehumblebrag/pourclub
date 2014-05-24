@@ -7,10 +7,9 @@
  * Requirements
  * - nil
  */
-tapthat.service('PubService', [function () {
-    // Private
+tapthat.service('PubService', [
+function () {
     var _current = null;
-    // Public
     return {
         'setCurrent': function (current) {
             _current = current;

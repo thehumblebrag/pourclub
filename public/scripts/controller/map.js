@@ -6,16 +6,12 @@
  * Requirements:
  * - nil
  */
-tapthat.controller('MapCtrl', ['$scope', 'PubFactory', 'PubService', 'LocationService', function ($scope, PubFactory, PubService, LocationService) {
-    // Private
-
-    // Public
-    $scope.pubs = [];
-
+tapthat.controller('MapCtrl', [
+'$scope', 'PubFactory', 'PubService', 'LocationService',
+function ($scope, PubFactory, PubService, LocationService) {
     $scope.close = function () {
         PubService.setCurrent(null);
     };
-
     // Set initial location to where user currently is
     if ('geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition(
@@ -30,19 +26,8 @@ tapthat.controller('MapCtrl', ['$scope', 'PubFactory', 'PubService', 'LocationSe
             }
         );
     }
-
     // Update selected pub when changed
     $scope.$watch(PubService.getCurrent, function (pub) {
-        $scope.current = pub;
+        $scope.current = PubService.getCurrent;
     });
-
-    // Update pubs to show anytime the user changes location
-    $scope.$watch(function () { return LocationService.getLocation(); }, function (location) {
-        if (location) {
-            PubFactory.query({ ll: [location.lat, location.lng].join(',') }, function (data) {
-                $scope.pubs = data;
-            });
-        }
-    });
-
 }]);
