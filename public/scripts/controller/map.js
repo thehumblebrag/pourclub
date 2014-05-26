@@ -23,8 +23,12 @@ function ($scope, PubFactory, PubService, LocationService) {
             },
             function (error) {
                 console.error('error', error);
+                LocationService.setLocation(-31.94914, 115.85891);
             }
         );
+    }
+    else {
+        LocationService.setLocation(-31.94914, 115.85891);
     }
     // Update selected pub when changed
     $scope.$watch(PubService.getCurrent, function (pub) {

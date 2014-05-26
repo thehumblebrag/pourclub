@@ -8,6 +8,10 @@ tapthat.controller('LocationCtrl', ['$scope', 'LocationService', function ($scop
     $scope.findLocation = function () {
         LocationService.setLocationByString($scope.location_search);
     };
-    // Default location is Northbridge
-    LocationService.setLocation(-31.94914, 115.85891459999993);
+    // Anytime the location changes, update the current suburb if not manual
+    $scope.$watch(function () { return LocationService.getLocationSuburb(); }, function (suburb) {
+        if (!$scope.location_search && suburb) {
+            $scope.location_search = suburb;
+        }
+    });
 }]);
