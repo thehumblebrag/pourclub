@@ -10,9 +10,7 @@ function ($scope, LocationService) {
         LocationService.setLocationByString($scope.location_search);
     };
     // Anytime the location changes, update the current suburb if not manual
-    $scope.$watch(function () {
-        return LocationService.getLocationSuburb();
-    }, function (suburb) {
+    $scope.$watch(LocationService.getLocationSuburb, function (suburb) {
         $scope.location_search = suburb;
     });
 }]);

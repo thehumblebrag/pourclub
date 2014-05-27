@@ -23,7 +23,7 @@ function ($scope, PubFactory, PubService, LocationService) {
         LocationService.setLocation(-31.94914, 115.85891);
     }
     // Update selected pub when changed
-    $scope.$watch(function () { PubService.getCurrent() }, function (pub) {
-        $scope.current = PubService.getCurrent;
+    $scope.$watch(PubService.getCurrent, function (pub) {
+        $scope.current = PubService.getCurrent();
     });
 }]);

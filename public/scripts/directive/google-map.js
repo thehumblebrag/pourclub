@@ -104,7 +104,7 @@ function (PubService, LocationService) {
                 LocationService.setLocation(position.lat(), position.lng());
             });
             // When pubs are added, show them on the map
-            $scope.$watch(function () { return PubService.getList(); }, function (pubs) {
+            $scope.$watch(PubService.getList, function (pubs) {
                 if (pubs.length) {
                     angular.forEach(pubs, function (pub, key) {
                         pubs._id = key;
@@ -112,7 +112,7 @@ function (PubService, LocationService) {
                     });
                 }
             });
-            $scope.$watch(function () { return LocationService.getLocation(); }, function (location) {
+            $scope.$watch(LocationService.getLocation, function (location) {
                 if (location) {
                     google_map.panTo(new google.maps.LatLng(location.lat, location.lng));
                 }
