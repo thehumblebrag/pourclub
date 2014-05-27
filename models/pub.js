@@ -33,7 +33,7 @@ var schema = new mongoose.Schema({
     }],
 }, options);
 
-// Virtuals for longitude and latitude
+// Virtual properties
 schema.virtual('latitude').get(function() {
     return this.location[1];
 });
