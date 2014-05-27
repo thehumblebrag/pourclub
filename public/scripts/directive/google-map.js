@@ -47,7 +47,7 @@ function (PubService, LocationService) {
             return false;
         }
         // Search for the provided marker by title and ID and center
-        $.each(this.markers, function (index, marker) {
+        this.markers.forEach(function (marker) {
             if (marker.title === search_title || marker.id === search_id) {
                 that.panTo(marker.position);
                 if (zoom) {
