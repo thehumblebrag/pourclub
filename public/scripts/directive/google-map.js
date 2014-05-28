@@ -1,14 +1,16 @@
 /**
  * Directive: GoogleMap
- *
  * Google Maps directive for displaying a map and managing a
  * set of markers from the parent controller's scope.
  */
 tapthat.directive('googleMap', [
 'PubService', 'LocationService',
 function (PubService, LocationService) {
+    Number.prototype.toRad = function() {
+        return this * (Math.PI / 180);
+    };
     var _markers = [];
-    var addGoogleMapMarker = function (map, position, id, title, icon) {
+    var addMapMarker = function (map, position, id, title, icon) {
         var marker = new google.maps.Marker({
                 map: map,
                 position: position,
@@ -25,7 +27,7 @@ function (PubService, LocationService) {
             return false;
         }
         var latlng = new google.maps.LatLng(pub.latitude, pub.longitude);
-        var marker = addGoogleMapMarker(map, latlng, pub._id, pub.name);
+        var marker = addMapMarker(map, latlng, pub._id, pub.name);
         // Set current to service when clicked
         google.maps.event.addListener(marker, 'click', function () {
             $scope.$apply(function () {
@@ -45,7 +47,7 @@ function (PubService, LocationService) {
             return false;
         }
         // Search for the provided marker by title and ID and center
-        $.each(this.markers, function (index, marker) {
+        this.markers.forEach(function (marker) {
             if (marker.title === search_title || marker.id === search_id) {
                 that.panTo(marker.position);
                 if (zoom) {
@@ -54,6 +56,35 @@ function (PubService, LocationService) {
                 if (popup) {
                     that.showMarker(marker);
                 }
+            }
+        });
+    };
+    var distanceBetweenPoints = function (first, second) {
+        var radius_of_earth = 6371;
+        var k = first.lat().toRad();
+        var j = second.lat().toRad();
+        var l = (second.lat() - first.lat()).toRad();
+        var m = (second.lng() - first.lng()).toRad();
+        var a = Math.sin(l / 2) * Math.sin(l / 2) +
+                Math.cos(k) * Math.cos(j) *
+                Math.sin(m / 2) * Math.sin(m / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return radius_of_earth * c * 1000;
+    }
+    var onLocationChange = function (map, trigger_distance, callback) {
+        var _start = null;
+        var _end = null;
+        google.maps.event.addListener(map, 'dragstart', function () {
+            if (!_start) {
+                _start = this.getCenter();
+            }
+        });
+        google.maps.event.addListener(map, 'dragend', function () {
+            _end = this.getCenter();
+            if (_start && _end && distanceBetweenPoints(_start, _end) > trigger_distance) {
+                callback(_end);
+                _start = null;
+                _end = null;
             }
         });
     };
@@ -69,8 +100,11 @@ function (PubService, LocationService) {
                 navigationControl: false,
                 mapTypeControl: false
             });
+            onLocationChange(google_map, 1000, function (position) {
+                LocationService.setLocation(position.lat(), position.lng());
+            });
             // When pubs are added, show them on the map
-            $scope.$watch(function () { return PubService.getList(); }, function (pubs) {
+            $scope.$watch(PubService.getList, function (pubs) {
                 if (pubs.length) {
                     angular.forEach(pubs, function (pub, key) {
                         pubs._id = key;
@@ -78,7 +112,7 @@ function (PubService, LocationService) {
                     });
                 }
             });
-            $scope.$watch(function () { return LocationService.getLocation(); }, function (location) {
+            $scope.$watch(LocationService.getLocation, function (location) {
                 if (location) {
                     google_map.panTo(new google.maps.LatLng(location.lat, location.lng));
                 }

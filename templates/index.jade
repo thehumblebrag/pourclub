@@ -49,9 +49,9 @@ html(lang="en", ng-app="tapthat")
               ul.search-beers(ng-if="booze_recommendations")
                 li.beer(ng-repeat="beer in booze_recommendations")
                   .beer-name {{beer.name}}
+                  img.beer-label(ng-src="{{beer.image}}", alt="{{beer.name}} label")
                   .beer-style {{beer.style}}
                   .beer-creator {{beer.creator_name}}
-                  img.beer-label(ng-src="{{beer.image}}", alt="{{beer.name}} label")
                   .beer-actions
                     button(ng-click="saveBeerToPub(beer)") Drank
             .current-beer(ng-click="close()") Close

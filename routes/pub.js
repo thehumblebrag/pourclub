@@ -9,6 +9,7 @@ var async = require('async');
 var Pub = require('../models/pub');
 
 var LIMIT = 10;
+var SEARCH_RADIUS = 1000;
 
 // Crud routes
 
@@ -72,7 +73,7 @@ var _sanatizeForUpdate = function (doc) {
 
 module.exports.listByLocation = function (req, res) {
     var ll = req.query.ll.split(',').map(Number);
-    var radius = req.query.r || 500;
+    var radius = req.query.r || SEARCH_RADIUS;
     var point = {
         type: 'Point',
         coordinates: ll.reverse()
@@ -83,18 +84,16 @@ module.exports.listByLocation = function (req, res) {
         distanceMultiplier: 6378137,
         lean: true
     };
-    // Find all nearby pubs, then return the actual pubs
-    // @TODO There must be a better way of handling geoNear without having
-    // to make a hundred different calls to Mongoose...
+    // Find all nearby pubs, then return the actual pubs, needs two
+    // part search as geoNear returns locational puposes
     Pub.geoNear(point, options, function (err, pubs) {
-        async.map(pubs, function (pub, callback) {
-            Pub.findById(pub.obj._id)
-                .populate('boozes')
-                .exec(function (err, pub) {
-                    callback(null, pub);
-                });
-        }, function (err, pubs) {
-            res.json(pubs);
+        var ids = pubs.map(function (term) {
+            return term.obj._id;
         });
+        Pub.find().where('_id').in(ids)
+            .populate('boozes')
+            .exec(function (err, pubs) {
+                res.json(pubs);
+            });
     });
 };
