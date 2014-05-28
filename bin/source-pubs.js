@@ -18,8 +18,12 @@ places.nearLocation(lat, lng, function (err, pubs) {
     }
     async.each(pubs, function (pub, next) {
         pub.save(function (err, result) {
-            if (err) {
-                next(err);
+            if (err && err.code == 11000) {
+                console.log('- duplicate dropped', pub.name);
+                return next();
+            }
+            else if (err) {
+                return next(err);
             }
             console.log('+ added', pub.name);
             next();

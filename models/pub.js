@@ -10,12 +10,8 @@ var ObjectId = mongoose.SchemaTypes.ObjectId;
 
 // Schema options
 var options = {
-    toObject: {
-        virtuals: true
-    },
-    toJSON: {
-        virtuals: true
-    }
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true }
 };
 
 // Schema
@@ -31,6 +27,10 @@ var schema = new mongoose.Schema({
         type: ObjectId,
         ref: 'Booze'
     }],
+    foursquare_id: {
+        type: String,
+        index: { unique: true }
+    }
 }, options);
 
 // Virtuals for longitude and latitude
