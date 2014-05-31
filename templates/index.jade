@@ -45,7 +45,7 @@ html(lang="en", ng-app="tapthat")
             form(ng-controller="BoozeAddrCtrl", ng-submit="searchBoozes()")
               label(for="beer") Find Beer
               input#beer(type="text", name="booze", placeholder="Coopers Pale Ale", ng-model="booze_search")
-              button(type="button").search-button Search
+              button(type="submit").search-button Search
               ul.search-beers(ng-if="booze_recommendations")
                 li.beer(ng-repeat="beer in booze_recommendations")
                   .beer-name {{beer.name}}
