@@ -7,7 +7,7 @@
 
 var async = require('async');
 var Pub = require('../models/pub');
-var places = require('../lib/places')
+var foursquare = require('../lib/foursquare');
 
 var LIMIT = 10;
 var SEARCH_RADIUS = 1500;
@@ -97,11 +97,14 @@ var listByLocation = function (req, res) {
 
 var listByLocationFoursquare = function (req, res) {
     var ll = req.query.ll.split(',').map(Number);
-    places.nearLocation(ll[0], ll[1], function (err, places) {
+    foursquare.nearLocation(ll[0], ll[1], function (err, places) {
         async.each(places, function (pub, next) {
             pub.save(function (err, result) {
-                if (err) {
-                    next(err);
+                if (err && err.code == 11000) {
+                    return next();
+                }
+                else if (err) {
+                    return next(err);
                 }
                 next();
             });
@@ -113,4 +116,4 @@ var listByLocationFoursquare = function (req, res) {
             res.json(places);
         });
     });
-}
+};
