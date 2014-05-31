@@ -25,8 +25,11 @@ module.exports.list = function (req, res, next) {
     var filter = {};
     if (search) {
         filter = {
-            name: new RegExp(search, 'i')
-        };
+            $or [
+                name: new RegExp(search, 'i'),
+                creator_name: new RegExp('Brewing', 'i')
+            ]
+        }
     }
     Booze.find(filter).limit(limit).exec(function (err, boozes) {
         if (err) {
