@@ -6,6 +6,7 @@
  */
 
 var Booze = require('../models/booze');
+var Creator = require('../models/creator');
 
 // Crud routes
 
@@ -21,17 +22,18 @@ module.exports.param = function (req, res, next, booze_id) {
 
 module.exports.list = function (req, res, next) {
     var search = req.query.search;
-    var limit = req.query.limit || 5;
-    var filter = {};
+    var limit = req.query.limit || 3;
     if (search) {
-        filter = {
-            $or [
-                name: new RegExp(search, 'i'),
-                creator_name: new RegExp('Brewing', 'i')
-            ]
-        }
+        return Booze.textSearch(search, { limit: limit, lean: true }, function (err, results) {
+            if (err) {
+                console.error(err);
+            }
+            res.json(results.results.map(function (result) {
+                return result.obj
+            }));
+        });
     }
-    Booze.find(filter).limit(limit).exec(function (err, boozes) {
+    Booze.find().populate('creator').limit(limit).exec(function (err, boozes) {
         if (err) {
             return console.error(err);
         }

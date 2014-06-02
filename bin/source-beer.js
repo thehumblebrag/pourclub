@@ -36,6 +36,7 @@ var handleBeers = function (beers) {
         if (beer.breweries) {
             handleCreator(beer.breweries[0], function (err, creator) {
                 new_beer.creator = creator;
+                new_beer.search = creator.name + ' ' + new_beer.name;
                 saveBeer(new_beer);
             });
         }
@@ -69,7 +70,6 @@ var handleCreator = function (brewery, callback) {
     console.log('+ added brewery', creator.name);
     creator.save(function (err, creator) {
         if (err && err.code == 11000) {
-            console.log(brewery.id);
             return Creator.findOne({ brewerydb_id: brewery.id }, function (err, brewery) {
                 console.log('- duplicate found', brewery.name);
                 callback(null, brewery);
