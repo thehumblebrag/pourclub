@@ -57,7 +57,7 @@ var saveBeer = function (beer) {
         }
         console.log('+ added', beer.name);
     });
-}
+};
 
 var handleCreator = function (brewery, callback) {
     var creator = new Creator({
@@ -66,7 +66,7 @@ var handleCreator = function (brewery, callback) {
         country: brewery.locations && brewery.locations[0].countryIsoCode,
         url: brewery.website,
         brewerydb_id: brewery.id
-    })
+    });
     console.log('+ added brewery', creator.name);
     creator.save(function (err, creator) {
         if (err && err.code == 11000) {
@@ -77,10 +77,10 @@ var handleCreator = function (brewery, callback) {
         }
         callback(err, creator);
     });
-}
+};
 
 var getPageOfBeer = function (page) {
-    request({ url: getUrl('beers', { p: page }), json: true }, function (err, response, body) {
+    request({ url: getUrl('beers', { p: page, withBreweries: 'Y' }), json: true }, function (err, response, body) {
         handleBeers(body.data);
     });
 };
