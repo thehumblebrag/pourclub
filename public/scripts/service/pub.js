@@ -18,9 +18,10 @@ function (PubFactory) {
     var getCurrent = function () {
         return _current;
     };
-    var updateListByLocation = function (location) {
+    var updateListByLocation = function (location, radius) {
         PubFactory.query({
-            ll: [location.lat, location.lng].join(',')
+            ll: [location.lat, location.lng].join(','),
+            r: radius
         }, function (data) {
             _list = data;
         });

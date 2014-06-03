@@ -59,18 +59,6 @@ function (PubService, LocationService) {
             }
         });
     };
-    var distanceBetweenPoints = function (first, second) {
-        var radius_of_earth = 6371;
-        var k = first.lat().toRad();
-        var j = second.lat().toRad();
-        var l = (second.lat() - first.lat()).toRad();
-        var m = (second.lng() - first.lng()).toRad();
-        var a = Math.sin(l / 2) * Math.sin(l / 2) +
-                Math.cos(k) * Math.cos(j) *
-                Math.sin(m / 2) * Math.sin(m / 2);
-        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return radius_of_earth * c * 1000;
-    }
     var onLocationChange = function (map, trigger_distance, callback) {
         var _start = null;
         var _end = null;
@@ -81,7 +69,7 @@ function (PubService, LocationService) {
         });
         google.maps.event.addListener(map, 'dragend', function () {
             _end = this.getCenter();
-            if (_start && _end && distanceBetweenPoints(_start, _end) > trigger_distance) {
+            if (_start && _end && google.maps.geometry.spherical.computeDistanceBetween(_start, _end) > trigger_distance) {
                 callback(_end);
                 _start = null;
                 _end = null;
@@ -99,6 +87,12 @@ function (PubService, LocationService) {
                 scrollwheel: false,
                 navigationControl: false,
                 mapTypeControl: false
+            });
+            // Update boundary search when zoom changes
+            google.maps.event.addListener(map, 'zoom_changed', function() {
+                var bounds = map.getBounds();
+                var radius = google.maps.geometry.spherical.computeDistanceBetween(bounds.getNorthEast(), map.getCenter());
+                LocationService.setRadius(radius);
             });
             onLocationChange(google_map, 1000, function (position) {
                 LocationService.setLocation(position.lat(), position.lng());

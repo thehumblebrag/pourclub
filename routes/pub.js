@@ -51,15 +51,21 @@ module.exports.delete = function (req, res, next) {
 };
 
 module.exports.update = function (req, res, next) {
-    // Mongo only supports list of IDs so clear the cruft
-    req.body.boozes = req.body.boozes.map(function (booze) {
-        return booze._id;
-    });
-    Pub.findByIdAndUpdate(req.node._id, _sanatizeForUpdate(req.body), function (err, data) {
-        if (err) {
-            console.error(err);
-        }
-        res.json({ err: err });
+    // Convert JS/JSON object to an array of IDs and remove duplicates
+    req.body.boozes = req.body.boozes
+        .map(function (booze) {
+            return booze._id;
+        }).filter(function (booze, pos, self) {
+            return self.indexOf(booze) === pos;
+        });
+    Pub.findByIdAndUpdate(req.node._id, _sanatizeForUpdate(req.body))
+        .populate('boozes')
+        .exec(function (err, data) {
+            if (err) {
+                console.error(err, data);
+                res.json({ err: err });
+            }
+            res.json(data);
     });
 };
 
@@ -85,13 +91,17 @@ var listByLocation = function (req, res) {
         distanceMultiplier: 6378137
     };
     Pub.geoNear(point, options, function (err, terms) {
-        pubs = terms.map(function (term) {
-            return term.obj;
-        });
-        if (!pubs.length) {
-            return listByLocationFoursquare(req, res);
-        }
-        res.json(pubs);
+        async.map(terms,
+            function (term, next) {
+                term.obj.populate('boozes', function (err, pub) {
+                    next(null, pub);
+                });
+            }, function (err, pubs) {
+                if (!pubs.length) {
+                    return listByLocationFoursquare(req, res);
+                }
+                res.json(pubs);
+            });
     });
 };
 
@@ -111,7 +121,6 @@ var listByLocationFoursquare = function (req, res) {
         }, function (err) {
             if (err) {
                 console.error(err);
-                process.exit(1);
             }
             res.json(places);
         });

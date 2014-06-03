@@ -7,6 +7,7 @@ tapthat.service('LocationService', [
 function ($timeout, PubService) {
     var _location = null;
     var _suburb = null;
+    var _radius = 2000;
     var _geocoder = new google.maps.Geocoder();
     var setLocation = function (lat, lng) {
         if (typeof lat === "object") {
@@ -15,12 +16,18 @@ function ($timeout, PubService) {
         else {
             _location = { lat: lat, lng: lng };
         }
-        PubService.updateListByLocation(_location);
+        PubService.updateListByLocation(getLocation(), getRadius());
         setSuburbFromLocation(lat, lng);
     };
     var getLocation = function () {
         return _location;
     };
+    var setRadius = function (radius) {
+        _radius = radius;
+    }
+    var getRadius = function () {
+        return _radius;
+    }
     var getLocationSuburb = function () {
         return _suburb;
     }

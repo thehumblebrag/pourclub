@@ -15,13 +15,13 @@ var schema = new mongoose.Schema({
     },
     brewerydb_id: {
         type: String,
-        index: { unique: true }
+        index: { unique: true, dropDups: true }
     }
 });
 
+// Indexes
 schema.plugin(search);
 schema.index({ search: 'text', name: 'text' });
 
 var Booze = mongoose.model('Booze', schema);
-
 module.exports = Booze;
