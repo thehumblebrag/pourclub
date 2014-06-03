@@ -51,10 +51,13 @@ module.exports.delete = function (req, res, next) {
 };
 
 module.exports.update = function (req, res, next) {
-    // Convert JS obj to Id for save
-    req.body.boozes = req.body.boozes.map(function (booze) {
-        return booze._id;
-    });
+    // Convert JS/JSON object to an array of IDs and remove duplicates
+    req.body.boozes = req.body.boozes
+        .map(function (booze) {
+            return booze._id;
+        }).filter(function (booze, pos, self) {
+            return self.indexOf(booze) === pos;
+        });
     Pub.findByIdAndUpdate(req.node._id, _sanatizeForUpdate(req.body))
         .populate('boozes')
         .exec(function (err, data) {
