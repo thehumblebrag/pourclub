@@ -1,8 +1,16 @@
 var mongoose = require('../lib/database');
 
-var Creator = new mongoose.Schema({
+var schema = new mongoose.Schema({
 	name: String,
-	location: String,
 	description: String,
-	brewerydb_id: String
+    country: String,
+    url: String,
+	brewerydb_id: {
+        type: String,
+        index: { unique: true }
+    }
 });
+
+var Creator = mongoose.model('Creator', schema);
+
+module.exports = Creator;

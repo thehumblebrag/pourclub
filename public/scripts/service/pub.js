@@ -17,7 +17,7 @@ function (PubFactory) {
     };
     var getCurrent = function () {
         return _current;
-    }
+    };
     var updateListByLocation = function (location) {
         PubFactory.query({
             ll: [location.lat, location.lng].join(',')
@@ -27,7 +27,7 @@ function (PubFactory) {
     };
     var getList = function () {
         return _list;
-    }
+    };
     return {
         'setCurrent': setCurrent,
         'getCurrent': getCurrent,

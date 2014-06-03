@@ -42,16 +42,16 @@ html(lang="en", ng-app="tapthat")
               li(ng-repeat="beer in current.boozes") {{beer.name}}
             .no-beers(ng-if="!current.boozes")
               p No beers bro, rack 'em up?
-            form(ng-controller="BoozeAddrCtrl")
+            form(ng-controller="BoozeAddrCtrl", ng-submit="searchBoozes()")
               label(for="beer") Find Beer
               input#beer(type="text", name="booze", placeholder="Coopers Pale Ale", ng-model="booze_search")
-              button(type="button", ng-click="searchBoozes()").search-button Search
+              button(type="submit").search-button Search
               ul.search-beers(ng-if="booze_recommendations")
                 li.beer(ng-repeat="beer in booze_recommendations")
                   .beer-name {{beer.name}}
+                  img.beer-label(ng-src="{{beer.image}}", alt="{{beer.name}} label")
                   .beer-style {{beer.style}}
                   .beer-creator {{beer.creator_name}}
-                  img.beer-label(ng-src="{{beer.image}}", alt="{{beer.name}} label")
                   .beer-actions
                     button(ng-click="saveBeerToPub(beer)") Drank
             .current-beer(ng-click="close()") Close

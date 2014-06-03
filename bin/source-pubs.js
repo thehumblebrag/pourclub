@@ -1,5 +1,5 @@
 var async = require('async');
-var places = require('../lib/places');
+var foursquare = require('../lib/foursquare');
 var argv = process.argv.slice(2);
 
 if (argv.length !== 2) {
@@ -12,14 +12,18 @@ var lng = argv[1];
 
 console.log('Searching for Pubs near', [lat, lng].join(','));
 
-places.nearLocation(lat, lng, function (err, pubs) {
+foursquare.nearLocation(lat, lng, function (err, pubs) {
     if (err) {
         return console.error(err);
     }
     async.each(pubs, function (pub, next) {
         pub.save(function (err, result) {
-            if (err) {
-                next(err);
+            if (err && err.code == 11000) {
+                console.log('- duplicate dropped', pub.name);
+                return next();
+            }
+            else if (err) {
+                return next(err);
             }
             console.log('+ added', pub.name);
             next();

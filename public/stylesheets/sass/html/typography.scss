@@ -12,7 +12,7 @@ $font-size: 16;
 $font-heading: 'Roboto Slab', serif;
 
 // body font
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,700);
 $font-body: 'Open Sans', sans-serif;
 
 // paragraph
@@ -59,7 +59,7 @@ h4{
 // bold
 b,
 strong{
-    font-weight:700;
+    font-weight:$bold;
 }
 
 // italics
