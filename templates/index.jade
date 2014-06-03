@@ -23,20 +23,21 @@ html(lang="en", ng-app="tapthat")
   body
     #site-header
       .inner
-        h1.logo Tap That!
+        .heading-wrapper
+          h1.logo The Pour Club
         p See what's on tap in:
         form#location-search(ng-controller="LocationCtrl", ng-submit="findLocation()")
           label
             span.visual-hide Where are you?
             input(type="text", ng-model="location_search", placeholder="Mt Lawley")
-            button(type="submit").search-button Search
+            button(type="submit").search-button Go
     block content
       .width-container
         #map(ng-controller="MapCtrl")
           .google-map(google-map)
             span.loading Loading map...
           section.current-pub(ng-if="current")
-            h1 {{current.name}}
+            h2 {{current.name}}
             url {{current.url}}
             ul.beers(ng-if="current.boozes")
               li(ng-repeat="beer in current.boozes") {{beer.name}}

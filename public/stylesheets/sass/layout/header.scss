@@ -11,15 +11,78 @@
     left: 50%;
     width:300px;
     margin-left: -150px;
-    background:$black;
+    background: linear-gradient(to bottom, #f6f6f6 0%, #f6f6f6 70%, #e6e6e6 100%);
     color:$white;
+    border-radius: 0 0 8px 8px;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
 	.inner {
-		padding:20px;
+		padding:20px 0px;
         border-top:0;
+        .heading-wrapper {
+            position: relative;
+            &:after {
+                z-index:1;
+                content: " ";
+                position: absolute;
+                bottom: 1px;
+                left: 50%;
+                z-index: 1;
+                border-radius: 100%;
+                box-shadow: 0 0 10px 0 #777;
+                width: 260px;
+                height: 20px;
+                margin-left: -130px;
+            }
+
+        }
+        h1 {
+            padding: 10px 0;
+            color: #444;
+            font-size: 48px;
+            text-align: center;
+            position: relative;
+            background: #f6f6f6;
+            z-index: 2;
+        }
+        p {
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+        form {
+            padding: 0 20px;
+            box-sizing: border-box;
+            position: relative;
+            width: 100%;
+        }
+            input {
+                width: 220px;
+                margin: 0;
+                border-bottom: 1px solid #ccc;
+                border-radius: 4px 0 0 4px;
+                height: 40px;
+                text-align: left;
+                text-indent: 10px;
+            }
+            button {
+                width: 40px;
+                height: 40px;
+                margin: 0;
+                background: #666;
+                color:#fff;
+                font-weight: 400;
+                border-radius: 0 4px 4px 0;
+                border-left: 1px solid #ccc;
+                background: linear-gradient(to bottom, #ccc 0%, #ccc 50%, #bbb 100%);
+                border-bottom: 1px solid #ccc;
+            }
 	}
     .logo {
         
     }
+
 }
 
 // Modernizr

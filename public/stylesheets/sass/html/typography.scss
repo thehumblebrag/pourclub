@@ -8,11 +8,8 @@
 $font-size: 16;
 
 // heading font
-@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:700);
-$font-heading: 'Roboto Slab', serif;
-
+$font-heading: 'Economica', cursive;
 // body font
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,700);
 $font-body: 'Open Sans', sans-serif;
 
 // paragraph
@@ -41,8 +38,7 @@ h2,
 h3,
 h4{
     font-family:$font-heading;
-    font-weight:600;
-    color:$yellow;
+    font-weight:400;
 }
 
     h1{

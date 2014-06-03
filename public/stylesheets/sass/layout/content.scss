@@ -28,7 +28,18 @@
         width:300px;
         margin-left:-150px;
         padding:20px;
-        color:$white;
-        background:$black;
+        color:#444;
+        background: linear-gradient(to bottom, #f6f6f6 0%, #f6f6f6 70%, #e6e6e6 100%);
+        border-radius: 8px 8px 0 0;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
         overflow:auto;
+            h2 {
+                padding: 0;
+                margin: 10px 0;
+                color: #444;
+                font-size: 32px;
+                text-align: center;
+                background: #f6f6f6;
+            }
     }
