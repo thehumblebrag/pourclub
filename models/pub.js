@@ -29,7 +29,7 @@ var schema = new mongoose.Schema({
     }],
     foursquare_id: {
         type: String,
-        index: { unique: true }
+        index: { unique: true, dropDups: true }
     }
 }, options);
 
@@ -41,10 +41,9 @@ schema.virtual('longitude').get(function() {
     return this.location[0];
 });
 
-var Pub = mongoose.model('Pub', schema);
-
 // Methods
 
 // Export module
 
+var Pub = mongoose.model('Pub', schema);
 module.exports = Pub;

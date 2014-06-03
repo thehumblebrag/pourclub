@@ -7,10 +7,9 @@ var schema = new mongoose.Schema({
     url: String,
 	brewerydb_id: {
         type: String,
-        index: { unique: true }
+        index: { unique: true, dropDups: true }
     }
 });
 
 var Creator = mongoose.model('Creator', schema);
-
 module.exports = Creator;

@@ -85,7 +85,7 @@ var listByLocation = function (req, res) {
         distanceMultiplier: 6378137
     };
     Pub.geoNear(point, options, function (err, terms) {
-        pubs = terms.map(function (term) {
+        var pubs = terms.map(function (term) {
             return term.obj;
         });
         if (!pubs.length) {
