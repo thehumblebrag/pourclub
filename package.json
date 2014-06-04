@@ -1,12 +1,12 @@
 {
-  "name": "tapthat",
+  "name": "pourclub",
   "version": "0.1.0",
   "description": "Find the tap that is near you.",
   "main": "index.js",
   "author": "thehumblebrag",
   "repository": {
     "type": "git",
-    "url": "https://github.com/thehumblebrag/tapthat.git"
+    "url": "https://github.com/thehumblebrag/pourclub.git"
   },
   "dependencies": {
     "express": "~4.2.0",

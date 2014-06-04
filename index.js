@@ -39,5 +39,5 @@ app.route('/api/booze/:booze_id')
     .delete(routes.booze.delete);
 
 app.listen(process.env.PORT || config.port, function () {
-    console.log('Ready to tap that');
+    console.log('Ready to pour');
 });

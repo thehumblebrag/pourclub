@@ -6,7 +6,7 @@
  * Requirements:
  * - ngResource
  */
-tapthat.factory('PubFactory', [
+pourclub.factory('PubFactory', [
 '$resource',
 function ($resource) {
     return $resource('/api/pub/:pub_id', { pub_id: '@_id' }, {

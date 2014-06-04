@@ -2,7 +2,7 @@
  * Routes: booze
  *
  * CRUD based routes to handle user interaction of
- * TapThat booze listings.
+ * pourclub booze listings.
  */
 
 var Booze = require('../models/booze');
@@ -29,7 +29,7 @@ module.exports.list = function (req, res, next) {
                 console.error(err);
             }
             res.json(results.results.map(function (result) {
-                return result.obj
+                return result.obj;
             }));
         });
     }

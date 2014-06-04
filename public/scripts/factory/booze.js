@@ -6,7 +6,7 @@
  * Requirements:
  * - ngResource
  */
-tapthat.factory('BoozeFactory', [
+pourclub.factory('BoozeFactory', [
 '$resource',
 function ($resource) {
     return $resource('/api/booze/:booze_id', {}, {

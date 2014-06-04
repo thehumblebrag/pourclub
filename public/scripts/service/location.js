@@ -2,7 +2,7 @@
  * Service: Location
  * Track the current user's location and search focus.
  */
-tapthat.service('LocationService', [
+pourclub.service('LocationService', [
 '$timeout', 'PubService',
 function ($timeout, PubService) {
     var _location = null;
@@ -24,13 +24,13 @@ function ($timeout, PubService) {
     };
     var setRadius = function (radius) {
         _radius = radius;
-    }
+    };
     var getRadius = function () {
         return _radius;
-    }
+    };
     var getLocationSuburb = function () {
         return _suburb;
-    }
+    };
     var setSuburbFromLocation = function (lat, lng) {
         var latlng = new google.maps.LatLng(lat, lng);
         _geocoder.geocode({ latLng: latlng }, function (results, status) {

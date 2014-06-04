@@ -7,7 +7,7 @@
  * Requirements
  * - nil
  */
-tapthat.service('PubService', [
+pourclub.service('PubService', [
 'PubFactory',
 function (PubFactory) {
     var _current = null;

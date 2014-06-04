@@ -2,7 +2,7 @@
  * Controller: Map
  * Base controller for managing consistant non-component interactions.
  */
-tapthat.controller('MapCtrl', [
+pourclub.controller('MapCtrl', [
 '$scope', 'PubFactory', 'PubService', 'LocationService',
 function ($scope, PubFactory, PubService, LocationService) {
     // Set current from service and update as it changes

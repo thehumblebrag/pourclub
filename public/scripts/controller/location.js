@@ -2,7 +2,7 @@
  * Controller: Location
  * Manage the user's location and where the Map should be.
  */
-tapthat.controller('LocationCtrl', [
+pourclub.controller('LocationCtrl', [
 '$scope', 'LocationService',
 function ($scope, LocationService) {
     $scope.location_search = null;

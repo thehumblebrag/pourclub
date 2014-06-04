@@ -6,7 +6,7 @@
  * Requirements:
  * - nilpmap
  */
-tapthat.controller('BoozeAddrCtrl', [
+pourclub.controller('BoozeAddrCtrl', [
 '$scope', 'PubFactory', 'PubService', 'BoozeFactory',
 function ($scope, PubFactory, PubService, BoozeFactory) {
     $scope.booze_search = null;

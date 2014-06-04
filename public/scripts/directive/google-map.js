@@ -3,7 +3,7 @@
  * Google Maps directive for displaying a map and managing a
  * set of markers from the parent controller's scope.
  */
-tapthat.directive('googleMap', [
+pourclub.directive('googleMap', [
 'PubService', 'LocationService',
 function (PubService, LocationService) {
     Number.prototype.toRad = function() {

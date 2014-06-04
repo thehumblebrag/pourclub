@@ -2,7 +2,7 @@
  * Routes: Pub
  *
  * CRUD based routes to handle user interaction of
- * TapThat pub listings.
+ * pourclub pub listings.
  */
 
 var async = require('async');
