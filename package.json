@@ -1,7 +1,7 @@
 {
   "name": "pourclub",
   "version": "0.1.0",
-  "description": "Find the tap that is near you.",
+  "description": "Prepare before you pour.",
   "main": "index.js",
   "author": "thehumblebrag",
   "repository": {
