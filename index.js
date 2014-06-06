@@ -1,7 +1,10 @@
-var express = require('express');
 var bodyParser = require('body-parser');
-var config = require('./config');
+var cookieParser = require('cookie-parser');
+var express = require('express');
+var passport = require('passport');
+var session = require('express-session');
 
+var config = require('./config');
 var app = express();
 
 // Server configuration
@@ -10,13 +13,26 @@ app.set('view engine', 'jade');
 app.engine('jade', require('jade').__express);
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser());
+app.use(cookieParser());
 
-// Setup available routes
+// Authentication
+app.use(session({ secret: 'e67a8ac63fc5ff2550bcf8f88dcc3807' }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Routes
 var routes = require('./routes');
 
 app.get('/', function (req, res) {
     res.render('index');
 });
+
+// Auth
+app.get('/auth/twitter', passport.authenticate('twitter'));
+app.get('/auth/twitter/callback', passport.authenticate('twitter', {
+    successRedirect: '/',
+    failureRedirect: '/fail'
+}));
 
 // Pub API
 app.param('pub_id', routes.pub.param);
