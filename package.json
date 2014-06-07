@@ -2,8 +2,19 @@
   "name": "pourclub",
   "version": "0.1.0",
   "description": "Prepare before you pour.",
-  "main": "index.js",
-  "author": "thehumblebrag",
+  "author": {
+    "name": "thehumblebrag",
+    "url": "http://thehumblebr.ag"
+  },
+  "contributors": [
+    { "name": "Jimmy Hillis" },
+    { "name": "Niaal Holder" },
+    { "name": "Sandy Lim" },
+    { "name": "Simon Manning" }
+  ],
+  "scripts": {
+      "start": "node index.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/thehumblebrag/pourclub.git"
