@@ -5,6 +5,7 @@
  * pourclub booze listings.
  */
 
+var async = require('async');
 var Booze = require('../models/booze');
 var Creator = require('../models/creator');
 
@@ -28,9 +29,15 @@ module.exports.list = function (req, res, next) {
             if (err) {
                 console.error(err);
             }
-            res.json(results.results.map(function (result) {
-                return result.obj;
-            }));
+            async.map(results.results, function (result, done) {
+                return Booze.populate(result.obj, 'creator', done);
+            }, function (err, boozes) {
+                if (err) {
+                    console.error(err);
+                    return res.json([]);
+                }
+                res.json(boozes);
+            });
         });
     }
     Booze.find().populate('creator').limit(limit).exec(function (err, boozes) {

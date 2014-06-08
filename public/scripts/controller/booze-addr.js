@@ -26,6 +26,7 @@ function ($scope, PubFactory, PubService, BoozeFactory) {
             if (resp.err) {
                 console.log('Error', resp.err);
             }
+            $scope.booze_recommendations = [];
         });
     };
 }]);
