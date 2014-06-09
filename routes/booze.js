@@ -9,7 +9,7 @@ var async = require('async');
 var Booze = require('../models/booze');
 var Creator = require('../models/creator');
 
-// Crud routes
+// CRUD routes
 
 module.exports.param = function (req, res, next, booze_id) {
     Booze.findById(booze_id, function (err, booze) {

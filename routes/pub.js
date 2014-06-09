@@ -6,8 +6,8 @@
  */
 
 var async = require('async');
-var Pub = require('../models/pub');
 var foursquare = require('../lib/foursquare');
+var Pub = require('../models/pub');
 
 var LIMIT = 10;
 var SEARCH_RADIUS = 1500;

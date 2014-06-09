@@ -1,10 +1,6 @@
 /**
  * Controller: BoozeAddrCtrl
- *
  * Manage searching and adding Booze to a pub.
- *
- * Requirements:
- * - nilpmap
  */
 pourclub.controller('BoozeAddrCtrl', [
 '$scope', 'PubFactory', 'PubService', 'BoozeFactory',
