@@ -24,13 +24,11 @@ html(lang="en", ng-app="pourclub")
     #site-header
       .inner
         .heading-wrapper
-          h1.logo The Pour Club
-        p See what's on tap in:
+          h1.logo #[span The] Pour Club
         form#location-search(ng-controller="LocationCtrl", ng-submit="findLocation()")
-          label
-            span.visual-hide Where are you?
-            input(type="text", ng-model="location_search", placeholder="Mt Lawley")
-            button(type="submit").search-button Go
+          label See what's on tap in:
+          input(type="text", ng-model="location_search", placeholder="Mt Lawley")
+          button(type="submit").search-button Go
     block content
       .width-container
         #map(ng-controller="MapCtrl")
