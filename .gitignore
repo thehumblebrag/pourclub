@@ -30,3 +30,4 @@ public/vendor
 *.css
 *min.js
 .ruby-version
+config.js
