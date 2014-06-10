@@ -6,88 +6,202 @@
 
 #site-header{
 	z-index:1;
-    position:fixed;
-    top:0;
-    left: 50%;
-    width:300px;
-    margin-left: -150px;
-    background: linear-gradient(to bottom, #f6f6f6 0%, #f6f6f6 70%, #e6e6e6 100%);
-    color:$white;
-    border-radius: 0 0 8px 8px;
-    border-bottom: 1px solid #ccc;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
+	position:fixed;
+	top:0;
+	width:300px;
+	background: linear-gradient(to bottom, #f6f6f6 0%, #f6f6f6 70%, #e6e6e6 100%);
+	color:$white;
+	border-radius: 0 0 8px 8px;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+}
 	.inner {
 		padding:20px 0px;
-        border-top:0;
-        .heading-wrapper {
-            position: relative;
-            &:after {
-                z-index:1;
-                content: " ";
-                position: absolute;
-                bottom: 1px;
-                left: 50%;
-                z-index: 1;
-                border-radius: 100%;
-                box-shadow: 0 0 10px 0 #777;
-                width: 260px;
-                height: 20px;
-                margin-left: -130px;
-            }
-
-        }
-        h1 {
-            padding: 10px 0;
-            color: #444;
-            font-size: 48px;
-            text-align: center;
-            position: relative;
-            background: #f6f6f6;
-            z-index: 2;
-        }
-        p {
-            text-align: center;
-            font-size: 14px;
-            color: #777;
-        }
-        form {
-            padding: 0 20px;
-            box-sizing: border-box;
-            position: relative;
-            width: 100%;
-        }
-            input {
-                width: 220px;
-                margin: 0;
-                border-bottom: 1px solid #ccc;
-                border-radius: 4px 0 0 4px;
-                height: 40px;
-                text-align: left;
-                text-indent: 10px;
-            }
-            button {
-                width: 40px;
-                height: 40px;
-                margin: 0;
-                background: #666;
-                color:#fff;
-                font-weight: 400;
-                border-radius: 0 4px 4px 0;
-                border-left: 1px solid #ccc;
-                background: linear-gradient(to bottom, #ccc 0%, #ccc 50%, #bbb 100%);
-                border-bottom: 1px solid #ccc;
-            }
+		border-top:0;
+		h1 {
+			padding: 10px 0;
+			color: #444;
+			font-size: 48px;
+			text-align: center;
+			position: relative;
+			background: #f6f6f6;
+			z-index: 2;
+		}
+		form {
+			padding: 0 20px;
+			box-sizing: border-box;
+			position: relative;
+			width: 100%;
+		}
+			label {
+				text-align: center;
+				font-size: 14px;
+				color: #777;
+				margin: 20px 0 10px;
+			}
+			input {
+				width: 220px;
+				margin: 0;
+				border-bottom: 1px solid #ccc;
+				border-radius: 4px 0 0 4px;
+				height: 40px;
+				text-align: left;
+				text-indent: 10px;
+			}
+			button {
+				width: 40px;
+				height: 40px;
+				margin: 0;
+				background: #666;
+				color:#fff;
+				font-weight: 400;
+				border-radius: 0 4px 4px 0;
+				border-left: 1px solid #ccc;
+				background: linear-gradient(to bottom, #ccc 0%, #ccc 50%, #bbb 100%);
+				border-bottom: 1px solid #ccc;
+			}
 	}
-    .logo {
-        
-    }
+		.heading-wrapper {
+			position: relative;
+			&:after {
+				z-index:1;
+				content: " ";
+				position: absolute;
+				bottom: 1px;
+				left: 50%;
+				z-index: 1;
+				border-radius: 100%;
+				box-shadow: 0 0 10px 0 #777;
+				width: 260px;
+				height: 20px;
+				margin-left: -130px;
+			}
+		}
 
+@media (min-width: 1200px) {
+	#site-header {
+		right: 40px;
+		width: 300px;
+	}
+}
+@media (min-width: 960px) and (max-width: 1199px) {
+	#site-header {
+		right: 40px;
+		width: 300px;
+	}
+}
+@media (min-width: 768px) and (max-width: 959px) {
+	#site-header {
+		right: 20px;
+		width: 300px;
+	}
+}
+@media (min-width: 640px) and (max-width: 767px) {
+	#site-header {
+		right: 10px;
+		width: 300px;
+	}
+}
+@media (max-width: 639px) {
+	#site-header {
+		position: relative;
+		width: 100%;
+		border-radius: 0;
+		.inner {
+			padding: 10px 0 0;
+			.heading-wrapper {
+				width: 100%;
+				&:after {				
+					width: 160px;
+					margin-left: -80px;
+				}
+			}
+			h1 {
+				font-size: 32px;
+			}
+			form {
+				clear: both;
+				width: 100%;
+				margin: 20px 0 0;
+				label {
+					width: 100%;
+					margin: 12px 0 10px;
+					text-align: center;
+				}
+				input {
+					width: 50%;
+					margin-left: 20%;
+				}
+				button {
+					width: 10%;
+					margin-right: 20%;
+				}
+				&:after {
+					content: '';
+					display: block;
+					clear: both;
+				}
+			}
+		}
+		&:after {
+			content: '';
+			display: block;
+			clear: both;
+			padding-bottom: 20px;
+		}
+	}
+}
+@media (max-width: 480px) {
+	#site-header {
+		.inner {
+			.heading-wrapper {
+				width: 32%;
+				float: left;
+				background: none;
+				margin-left: 10px;
+				&:after {		
+					display: none;
+				}
+			}
+			h1 {
+				font-size: 32px;
+				line-height: 29px;
+				background: none;
+				padding-top: 9px;
+				text-align: left;
+				margin-left: 5px;
+				span {
+					font-size: 16px;
+					width: 100%;
+					display: inline-block;
+					text-align: left;
+					margin-left: 10px;
+					line-height: 5px;
+				}
+			}
+			form {
+				clear: none;
+				width: 63%;
+				float: right;
+				margin: 0;
+				padding: 0;
+				label {
+					width: 100%;
+					margin: 12px 0 10px;
+					text-align: center;
+				}
+				input {
+					width: 70%;
+					margin-left: 5%;
+				}
+				button {
+					width: 20%;
+					margin-right: 5%;
+				}
+			}
+		}
+	}
 }
 
-// Modernizr
-    // .no-flexbox{}
 
-// Responsive
-    // @media @tablet{}
-    // Set in settings.less

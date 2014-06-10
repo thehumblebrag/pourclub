@@ -26,24 +26,21 @@ html(lang="en", ng-app="pourclub")
     #site-header
       .inner
         .heading-wrapper
-          h1.logo The Pour Club
-        p See what's on tap in:
+          h1.logo #[span The] Pour Club
         form#location-search(ng-controller="LocationCtrl", ng-submit="findLocation()")
-          label
-            span.visual-hide Where are you?
-            input(type="text", ng-model="location_search", placeholder="Mt Lawley")
-            button(type="submit").search-button Go
+          label See what's on tap in:
+          input(type="text", ng-model="location_search", placeholder="Mt Lawley")
+          button(type="submit").search-button Go
     block content
-      .width-container
-        #map(ng-controller="MapCtrl")
-          .google-map(google-map)
-            span.loading Loading map...
-          section.current-pub(ng-if="current")
-            h2 {{current.name}}
-            .current-pub-address {{current.address}}
-            a.current-pub-url(ng-if="current.url", ng-href="{{current.url}}") Website
-            ul.beers(ng-if="current.boozes")
-              li(ng-repeat="beer in current.boozes") {{beer.name}} by {{beer.creator_name}}
-            .no-beers(ng-if="!current.boozes")
-              p No beers bro, rack 'em up?
-            +add-beer
+      #map(ng-controller="MapCtrl")
+        .google-map(google-map)
+          span.loading Loading map...
+        section.current-pub(ng-if="current")
+          h2 {{current.name}}
+          .current-pub-address {{current.address}}
+          a.current-pub-url(ng-if="current.url", ng-href="{{current.url}}") Website
+          ul.beers(ng-if="current.boozes")
+            li(ng-repeat="beer in current.boozes") {{beer.name}}
+          .no-beers(ng-if="!current.boozes")
+            p No beers bro, rack 'em up?
+          +add-beer
