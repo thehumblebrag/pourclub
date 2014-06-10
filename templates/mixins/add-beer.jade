@@ -1,8 +1,8 @@
 mixin add-beer
   section#add-beer(ng-controller="BoozeAddrCtrl")
-    a.add-beer--toggle(href="#", ng-click="toggle()") Beer not listed? Add it.
+    a.add-beer--toggle(href="#", ng-click="toggle()", ng-show="!isVisible()") Beer not listed? Add it.
     .add-beer--entry(ng-show="isVisible()")
-      h2 Add a Drink
+      h3 Add a Drink
       form(ng-submit="searchBoozes()")
         label(for="beer") Find Beer
         input#beer(type="text", name="booze", placeholder="Coopers Pale Ale", ng-model="booze_search")
@@ -14,5 +14,5 @@ mixin add-beer
             .beer-style {{beer.style}}
             .beer-creator {{beer.creator_name}}
             .beer-actions
-              button(ng-click="saveBeerToPub(beer)") Drank
+              button(ng-click="saveBeerToPub(beer)") Add this beer
       a.current-beer(href="#", ng-click="toggle()") Nevermind
