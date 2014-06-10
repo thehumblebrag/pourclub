@@ -1,3 +1,5 @@
+include mixins/add-beer
+
 doctype
 <!--[if IE 7]>
 html(lang="en", ng-app="invita").lt-ie10.lt-ie9.lt-ie8.lt-ie7
@@ -38,20 +40,10 @@ html(lang="en", ng-app="pourclub")
             span.loading Loading map...
           section.current-pub(ng-if="current")
             h2 {{current.name}}
-            url {{current.url}}
+            .current-pub-address {{current.address}}
+            a.current-pub-url(ng-if="current.url", ng-href="{{current.url}}") Website
             ul.beers(ng-if="current.boozes")
               li(ng-repeat="beer in current.boozes") {{beer.name}}
             .no-beers(ng-if="!current.boozes")
               p No beers bro, rack 'em up?
-            form(ng-controller="BoozeAddrCtrl", ng-submit="searchBoozes()")
-              label(for="beer") Find Beer
-              input#beer(type="text", name="booze", placeholder="Coopers Pale Ale", ng-model="booze_search")
-              button(type="submit").search-button Search
-              ul.search-beers(ng-if="booze_recommendations")
-                li.beer(ng-repeat="beer in booze_recommendations", data-booze-id="{{beer.id}}")
-                  img.beer-label(ng-src="{{beer.image}}", alt="{{beer.name}} label")
-                  .beer-name {{beer.name}}
-                  .beer-creator by {{beer.creator.name}}
-                  .beer-actions
-                    button(ng-click="saveBeerToPub(beer)") Drank
-            .current-beer(ng-click="close()") Close
+            +add-beer
