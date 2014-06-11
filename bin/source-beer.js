@@ -1,14 +1,12 @@
-var url = require('url');
-var request = require('request');
 var _ = require('underscore');
-
-// Script configuration
 var config = require('../config');
+var request = require('request');
+var url = require('url');
+var Creator = require('../models/creator');
+var Drink = require('../models/drink');
+
 var api_key = config.brewerydb.api_key;
 var api_url = 'api.brewerydb.com';
-
-var Booze = require('../models/booze');
-var Creator = require('../models/creator');
 
 var getUrl = function (method, params) {
     var apiParams = {
@@ -25,7 +23,7 @@ var getUrl = function (method, params) {
 
 var handleBeers = function (beers) {
     beers.forEach(function (beer) {
-        var new_beer = new Booze({
+        var new_beer = new Drink({
             brewerydb_id: beer.id,
             name: beer.name,
             style: beer.style && beer.style.name,

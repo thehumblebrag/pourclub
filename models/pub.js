@@ -23,9 +23,9 @@ var schema = new mongoose.Schema({
     },
     address: String,
     url: String,
-    boozes: [{
+    drinks: [{
         type: ObjectId,
-        ref: 'Booze'
+        ref: 'Drink'
     }],
     foursquare_id: {
         type: String,

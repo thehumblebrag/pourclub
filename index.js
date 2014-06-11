@@ -44,7 +44,7 @@ app.route('/api/pub/:pub_id')
     .put(routes.pub.update)
     .delete(routes.pub.delete);
 
-// Booze API
+// Drink API
 app.param('booze_id', routes.booze.param);
 app.route('/api/booze')
     .get(routes.booze.list)

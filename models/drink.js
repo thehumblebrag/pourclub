@@ -23,5 +23,5 @@ var schema = new mongoose.Schema({
 schema.plugin(search);
 schema.index({ search: 'text', name: 'text' });
 
-var Booze = mongoose.model('Booze', schema);
-module.exports = Booze;
+var Drink = mongoose.model('Drink', schema);
+module.exports = Drink;
