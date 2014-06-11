@@ -1,10 +1,10 @@
 /**
- * Controller: BoozeAddrCtrl
- * Manage searching and adding Booze to a pub.
+ * Controller: PlaceDrinkCtrl
+ * Manage searching and adding Drink to a place.
  */
-pourclub.controller('BoozeAddrCtrl', [
-'$scope', 'PubFactory', 'PubService', 'BoozeFactory',
-function ($scope, PubFactory, PubService, BoozeFactory) {
+pourclub.controller('PlaceDrinkCtrl', [
+'$scope', 'PubFactory', 'PubService', 'DrinkFactory',
+function ($scope, PubFactory, PubService, DrinkFactory) {
     var _show = false;
     $scope.toggle = function (state) {
         _show = typeof state !== "undefined" ? state : !_show;
@@ -13,24 +13,24 @@ function ($scope, PubFactory, PubService, BoozeFactory) {
     $scope.isVisible = function () {
         return _show;
     };
-    $scope.booze_search = null;
-    $scope.booze_recommendations = [];
+    $scope.drink_search = null;
+    $scope.drink_recommendations = [];
     // Search for beers by user provided string
-    $scope.searchBoozes = function () {
-        $scope.booze_recommendations = [];
-        BoozeFactory.query({ search: $scope.booze_search }, function (boozes) {
-            $scope.booze_recommendations = boozes;
+    $scope.searchDrinks = function () {
+        $scope.drink_recommendations = [];
+        DrinkFactory.query({ search: $scope.drink_search }, function (drinks) {
+            $scope.drink_recommendations = drinks;
         });
     };
     // Add select beer to current pub
-    $scope.saveBeerToPub = function (booze) {
+    $scope.saveBeerToPub = function (drink) {
         var pub = PubService.getCurrent();
-        pub.boozes.push(booze);
+        pub.drinks.push(drink);
         pub.$update(function (resp) {
             if (resp.err) {
                 console.log('Error', resp.err);
             }
-            $scope.booze_recommendations = [];
+            $scope.drink_recommendations = [];
         });
     };
 }]);
