@@ -45,14 +45,14 @@ app.route('/api/pub/:pub_id')
     .delete(routes.pub.delete);
 
 // Drink API
-app.param('booze_id', routes.booze.param);
-app.route('/api/booze')
-    .get(routes.booze.list)
-    .post(routes.booze.save);
-app.route('/api/booze/:booze_id')
-    .get(routes.booze.get)
-    .put(routes.booze.update)
-    .delete(routes.booze.delete);
+app.param('drink_id', routes.drink.param);
+app.route('/api/drink')
+    .get(routes.drink.list)
+    .post(routes.drink.save);
+app.route('/api/drink/:drink_id')
+    .get(routes.drink.get)
+    .put(routes.drink.update)
+    .delete(routes.drink.delete);
 
 app.listen(process.env.PORT || config.port, function () {
     console.log('Prepared to pour.');

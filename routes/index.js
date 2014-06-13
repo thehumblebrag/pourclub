@@ -1,3 +1,3 @@
 module.exports.auth = require('./auth');
-module.exports.booze = require('./booze');
+module.exports.drink = require('./drink');
 module.exports.pub = require('./pub');

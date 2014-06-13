@@ -16,7 +16,7 @@ var SEARCH_RADIUS = 1500;
 
 module.exports.param = function (req, res, next, pub_id) {
     Pub.findById(pub_id)
-        .populate('boozes')
+        .populate('drinks')
         .exec(function (err, pub) {
             if (err) {
                 return console.error(err);
@@ -30,7 +30,7 @@ module.exports.list = function (req, res, next) {
     if (req.query.ll) {
         return listByLocation(req, res);
     }
-    Pub.find().populate('boozes').limit(LIMIT).exec(function (err, pubs) {
+    Pub.find().populate('drinks').limit(LIMIT).exec(function (err, pubs) {
         if (err) {
             return console.error(err);
         }
@@ -52,14 +52,14 @@ module.exports.delete = function (req, res, next) {
 
 module.exports.update = function (req, res, next) {
     // Convert JS/JSON object to an array of IDs and remove duplicates
-    req.body.boozes = req.body.boozes
-        .map(function (booze) {
-            return booze._id;
-        }).filter(function (booze, pos, self) {
-            return self.indexOf(booze) === pos;
+    req.body.drinks = req.body.drinks
+        .map(function (drink) {
+            return drink._id;
+        }).filter(function (drink, pos, self) {
+            return self.indexOf(drink) === pos;
         });
     Pub.findByIdAndUpdate(req.node._id, _sanatizeForUpdate(req.body))
-        .populate('boozes')
+        .populate('drinks')
         .exec(function (err, data) {
             if (err) {
                 console.error(err, data);
@@ -93,7 +93,7 @@ var listByLocation = function (req, res) {
     Pub.geoNear(point, options, function (err, terms) {
         async.map(terms,
             function (term, next) {
-                term.obj.populate('boozes', function (err, pub) {
+                term.obj.populate('drinks', function (err, pub) {
                     next(null, pub);
                 });
             }, function (err, pubs) {

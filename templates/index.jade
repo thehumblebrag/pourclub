@@ -39,8 +39,8 @@ html(lang="en", ng-app="pourclub")
           h2 {{current.name}}
           .current-pub-address {{current.address}}
           a.current-pub-url(ng-if="current.url", ng-href="{{current.url}}") Website
-          ul.beers(ng-if="current.boozes")
-            li(ng-repeat="beer in current.boozes") {{beer.name}}
-          .no-beers(ng-if="!current.boozes")
+          ul.beers(ng-if="current.drinks")
+            li(ng-repeat="beer in current.drinks") {{beer.name}}
+          .no-beers(ng-if="!current.drinks")
             p No beers bro, rack 'em up?
           +add-beer
