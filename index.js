@@ -21,38 +21,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-var routes = require('./routes');
-
-app.get('/', function (req, res) {
-    res.render('index');
-});
-
-// Auth
-app.get('/auth/twitter', passport.authenticate('twitter'));
-app.get('/auth/twitter/callback', passport.authenticate('twitter', {
-    successRedirect: '/',
-    failureRedirect: '/fail'
-}));
-
-// Pub API
-app.param('pub_id', routes.pub.param);
-app.route('/api/pub')
-    .get(routes.pub.list)
-    .post(routes.pub.save);
-app.route('/api/pub/:pub_id')
-    .get(routes.pub.get)
-    .put(routes.pub.update)
-    .delete(routes.pub.delete);
-
-// Drink API
-app.param('booze_id', routes.booze.param);
-app.route('/api/booze')
-    .get(routes.booze.list)
-    .post(routes.booze.save);
-app.route('/api/booze/:booze_id')
-    .get(routes.booze.get)
-    .put(routes.booze.update)
-    .delete(routes.booze.delete);
+var routes = require('./routes')(app);
 
 app.listen(process.env.PORT || config.port, function () {
     console.log('Prepared to pour.');
