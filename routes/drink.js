@@ -2,7 +2,7 @@
  * Routes: drink
  *
  * CRUD based routes to handle user interaction of
- * pourclub booze listings.
+ * pourclub drink listings.
  */
 
 var async = require('async');
@@ -11,12 +11,12 @@ var Creator = require('../models/creator');
 
 // CRUD routes
 
-module.exports.param = function (req, res, next, booze_id) {
-    Drink.findById(booze_id, function (err, booze) {
+module.exports.param = function (req, res, next, drink_id) {
+    Drink.findById(drink_id, function (err, drink) {
         if (err) {
             return console.error(err);
         }
-        req.node = booze;
+        req.node = drink;
         next();
     });
 };
@@ -31,20 +31,20 @@ module.exports.list = function (req, res, next) {
             }
             async.map(results.results, function (result, done) {
                 return Drink.populate(result.obj, 'creator', done);
-            }, function (err, boozes) {
+            }, function (err, drinks) {
                 if (err) {
                     console.error(err);
                     return res.json([]);
                 }
-                res.json(boozes);
+                res.json(drinks);
             });
         });
     }
-    Drink.find().populate('creator').limit(limit).exec(function (err, boozes) {
+    Drink.find().populate('creator').limit(limit).exec(function (err, drinks) {
         if (err) {
             return console.error(err);
         }
-        res.json(boozes);
+        res.json(drinks);
     });
 };
 
