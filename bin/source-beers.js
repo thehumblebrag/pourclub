@@ -1,4 +1,5 @@
 var _ = require('underscore');
+var async = require('async');
 var config = require('../config');
 var request = require('request');
 var url = require('url');
@@ -9,51 +10,52 @@ var api_key = config.brewerydb.api_key;
 var api_url = 'api.brewerydb.com';
 
 var getUrl = function (method, params) {
-    var apiParams = {
+    params = _.extend({
         key: api_key,
         format: 'json'
-    };
+    }, params);
     return url.format({
         protocol: 'https',
         hostname: api_url,
         pathname: 'v2/' + method,
-        query: _.extend(apiParams, params)
+        query: params
     });
 };
 
-var handleBeers = function (beers) {
-    beers.forEach(function (beer) {
-        var new_beer = new Drink({
-            brewerydb_id: beer.id,
-            name: beer.name,
-            style: beer.style && beer.style.name,
-            description: beer.description,
-            abv: beer.abv,
-            image: beer.labels && beer.labels.large
+var handleDrinks = function (drinks, callback) {
+    async.each(drinks, function (drink, next) {
+        var new_drink = new Drink({
+            brewerydb_id: drink.id,
+            name: drink.name,
+            style: drink.style && drink.style.name,
+            description: drink.description,
+            abv: drink.abv,
+            image: drink.labels && drink.labels.large
         });
-        if (beer.breweries) {
-            handleCreator(beer.breweries[0], function (err, creator) {
-                new_beer.creator = creator;
-                new_beer.search = creator.name + ' ' + new_beer.name;
-                saveBeer(new_beer);
+        if (drink.breweries) {
+            return handleCreator(drink.breweries[0], function (err, creator) {
+                new_drink.creator = creator;
+                new_drink.search = creator.name + ' ' + new_drink.name;
+                return saveDrink(new_drink, next);
             });
         }
         else {
-            saveBeer(new_beer);
+            saveDrink(new_drink, next);
         }
-    });
+    }, callback);
 };
 
-var saveBeer = function (beer) {
-    beer.save(function (err) {
+var saveDrink = function (drink, callback) {
+    drink.save(function (err, drink) {
         if (err && err.code == 11000) {
-            console.log('- duplicate dropped', beer.name);
+            console.warn('- duplicate dropped');
             return;
         }
         if (err) {
             return console.error(err);
         }
-        console.log('+ added', beer.name);
+        console.log('+ added', drink.name);
+        callback(null, drink);
     });
 };
 
@@ -70,33 +72,40 @@ var handleCreator = function (brewery, callback) {
         if (err && err.code == 11000) {
             return Creator.findOne({ brewerydb_id: brewery.id }, function (err, brewery) {
                 console.log('- duplicate found', brewery.name);
-                callback(null, brewery);
+                return callback(null, brewery);
             });
         }
         callback(err, creator);
     });
 };
 
-var getPageOfBeer = function (page) {
+var getPage = function (page, callback) {
     request({ url: getUrl('beers', { p: page, withBreweries: 'Y' }), json: true }, function (err, response, body) {
-        handleBeers(body.data);
+        console.log(page, body);
+        handleDrinks(body.data, callback);
     });
 };
 
 request({ url: getUrl('beers', { withBreweries: 'Y' }), json: true}, function (err, response, body) {
-    // Do this to get the total pages of beer.
+    // Do this to get the total pages of drink.
     if (err) {
         console.error(err);
     }
-    else if (body.status == 'failure') {
-        console.error('Error:', body.errorMessage);
+    else if (body.status === 'failure') {
+        console.error(new Error(body.errorMessage));
     }
-    else if (response.statusCode == 200) {
-        // This is the first beer list, so handle it anyway.
-        handleBeers(body.data);
+    else if (response.statusCode === 200) {
+        // This is the first drink list, so handle it anyway.
+        handleDrinks(body.data);
         // Now get the rest.
-        for (var i = 2; i < body.numberOfPages; i++) {
-            getPageOfBeer(i);
-        }
+        async.times(body.numberOfPages, function (n, next) {
+            getPage(++n, next);
+        }, function (err) {
+            if (err) {
+                console.error(1);
+                process.exit(1);
+            }
+            process.exit();
+        });
     }
 });
