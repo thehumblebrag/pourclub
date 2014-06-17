@@ -1,5 +1,5 @@
 var auth = require('./auth');
-var booze = require('./booze');
+var drink = require('./drink');
 var passport = require('passport');
 var pub = require('./pub');
 
@@ -28,13 +28,13 @@ module.exports = function (app) {
         .delete(pub.delete);
 
     // Drink API
-    app.param('booze_id', booze.param);
-    app.route('/api/booze')
-        .get(booze.list)
-        .post(booze.save);
-    app.route('/api/booze/:booze_id')
-        .get(booze.get)
-        .put(booze.update)
-        .delete(booze.delete);
+    app.param('drink_id', drink.param);
+    app.route('/api/drink')
+        .get(drink.list)
+        .post(drink.save);
+    app.route('/api/drink/:drink_id')
+        .get(drink.get)
+        .put(drink.update)
+        .delete(drink.delete);
 
 };
