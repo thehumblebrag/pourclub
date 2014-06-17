@@ -58,8 +58,11 @@
 				font-weight: 400;
 				border-radius: 0 4px 4px 0;
 				border-left: 1px solid #ccc;
-				background: linear-gradient(to bottom, #ccc 0%, #ccc 50%, #bbb 100%);
+				background: linear-gradient(to bottom, #999 0%, #999 50%, #777 100%);
 				border-bottom: 1px solid #ccc;
+				&:hover {
+					background: linear-gradient(to bottom, #939393 0%, #939393 50%, #717171 100%);
+				}
 			}
 	}
 		.heading-wrapper {
