@@ -3,10 +3,9 @@ var booze = require('../lib/booze');
 var untappd = require('../lib/untappd');
 var Pub = require('../models/pub');
 
-Pub.find().limit(1).exec(function(err, pubs) {
+Pub.find({ boozes: [] }).limit(5).exec(function(err, pubs) {
     async.each(pubs, function (pub, done) {
         untappd.findBeersAtLocation(pub, function (err, beers) {
-            console.error(err, beers);
             if (err) {
                 console.error(err);
                 process.exit(1);
@@ -33,7 +32,6 @@ Pub.find().limit(1).exec(function(err, pubs) {
             console.error(err);
             process.exit(1);
         }
-        console.log('Done');
         process.exit();
     });
 });

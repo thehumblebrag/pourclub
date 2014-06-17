@@ -27,6 +27,10 @@ var schema = new mongoose.Schema({
         type: ObjectId,
         ref: 'Booze'
     }],
+    untappd_id: {
+        type: String,
+        index: { unique: true, dropDups: true, sparse: true }
+    },
     foursquare_id: {
         type: String,
         index: { unique: true, dropDups: true }
@@ -44,6 +48,5 @@ schema.virtual('longitude').get(function() {
 // Methods
 
 // Export module
-
 var Pub = mongoose.model('Pub', schema);
 module.exports = Pub;
