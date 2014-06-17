@@ -28,4 +28,10 @@
 		text-align:right;
 	}
 }
-
+.beers {
+	list-style-type: none;
+	padding: 0px;
+	.delete-beer {
+		font-size:$small;
+	}
+}
