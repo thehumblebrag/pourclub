@@ -33,4 +33,9 @@ function ($scope, PubFactory, PubService, DrinkFactory) {
             $scope.drink_recommendations = [];
         });
     };
+    // Delete beer from pub
+    $scope.deleteBeerFromPub = function (drink) {
+        var pub = PubService.getCurrent();
+        pub.drinks.delete(drink);
+    }
 }]);
