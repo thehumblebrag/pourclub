@@ -110,7 +110,7 @@ var listByLocationFoursquare = function (req, res) {
     foursquare.nearLocation(ll[0], ll[1], function (err, places) {
         async.each(places, function (pub, next) {
             pub.save(function (err, result) {
-                if (err && err.code == 11000) {
+                if (err && err.code === 11000) {
                     return next();
                 }
                 else if (err) {
