@@ -3,7 +3,7 @@ var drink = require('../lib/drink');
 var untappd = require('../lib/untappd');
 var Pub = require('../models/pub');
 
-Pub.find({ drinks: [] }).limit(5).exec(function(err, pubs) {
+Pub.find({ drinks: [] }).limit(25).exec(function(err, pubs) {
     async.each(pubs, function (pub, done) {
         untappd.findBeersAtLocation(pub, function (err, beers) {
             if (err) {

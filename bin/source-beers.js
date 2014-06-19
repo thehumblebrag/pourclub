@@ -81,7 +81,6 @@ var handleCreator = function (brewery, callback) {
 
 var getPage = function (page, callback) {
     request({ url: getUrl('beers', { p: page, withBreweries: 'Y' }), json: true }, function (err, response, body) {
-        console.log(page, body);
         handleDrinks(body.data, callback);
     });
 };
