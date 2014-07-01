@@ -35,13 +35,13 @@ html(lang="en", ng-app="pourclub")
       #map(ng-controller="MapCtrl")
         .google-map(google-map)
           span.loading Loading map...
-        section.current-pub(ng-if="current")
+        section.current-pub(ng-if="current", ng-controller="PlaceDrinkCtrl")
           h2 {{current.name}}
           .current-pub-address {{current.address}}
           a.current-pub-url(ng-if="current.url", ng-href="{{current.url}}") Website
           ul.beers(ng-if="current.drinks")
-            li(ng-repeat="beer in current.drinks") {{beer.name}}&nbsp;
-              a.delete-beer(href="#", ng-click="deleteBeerFromPub(drink)") [x]
+            li(ng-repeat="drink in current.drinks") {{drink.name}}
+              a.delete-beer(ng-click="deleteBeerFromPub(drink, current)") [x]
           .no-beers(ng-if="!current.drinks")
             p No beers bro, rack 'em up?
           +add-beer

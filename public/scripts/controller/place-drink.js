@@ -28,14 +28,20 @@ function ($scope, PubFactory, PubService, DrinkFactory) {
         pub.drinks.push(drink);
         pub.$update(function (resp) {
             if (resp.err) {
-                console.log('Error', resp.err);
+                console.error(resp.err);
             }
             $scope.drink_recommendations = [];
         });
     };
     // Delete beer from pub
-    $scope.deleteBeerFromPub = function (drink) {
-        var pub = PubService.getCurrent();
-        pub.drinks.delete(drink);
-    }
+    $scope.deleteBeerFromPub = function (drink, pub) {
+        pub.drinks = pub.drinks.filter(function (_drink) {
+            return drink.id !== _drink.id;
+        });
+        pub.$update(function (resp) {
+            if (resp.err) {
+                console.error(resp.err);
+            }
+        });
+    };
 }]);

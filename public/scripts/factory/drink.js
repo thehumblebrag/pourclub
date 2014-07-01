@@ -11,6 +11,7 @@ pourclub.factory('DrinkFactory', [
 function ($resource) {
     return $resource('/api/drink/:drink_id', {}, {
         'query': { method: 'GET', isArray: true },
-        'update': { method: 'PUT' }
+        'update': { method: 'PUT' },
+        'delete': { method: 'DELETE' }
     });
 }]);
