@@ -2,11 +2,10 @@ mixin add-beer
   section#add-beer
     a.add-beer--toggle(href="#", ng-click="toggle()", ng-show="!isVisible()") Beer not listed? Add it.
     .add-beer--entry(ng-show="isVisible()")
-      h3 Add a Drink
       form(ng-submit="searchDrinks()")
-        label(for="beer") Find Beer
+        label(for="beer") Search for a beer:
         input#beer(type="text", name="drink", placeholder="Coopers Pale Ale", ng-model="drink_search")
-        button(type="submit").search-button Search
+        button(type="submit").search-button Go
         ul.search-beers(ng-if="drink_recommendations")
           li.beer(ng-repeat="beer in drink_recommendations")
             img.beer-label(ng-src="{{beer.image}}", alt="{{beer.name}} label")

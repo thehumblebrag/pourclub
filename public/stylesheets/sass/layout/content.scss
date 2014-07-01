@@ -24,7 +24,8 @@
 		z-index:1;
 		position:fixed;
 		right: 40px;
-		width:300px;
+		bottom:0px;
+		width:400px;
 		margin-left:-150px;
 		padding:20px;
 		color:#444;
@@ -35,13 +36,81 @@
 		overflow:auto;
 		h2 {
 			padding: 0;
-			margin: 10px 0;
+			margin: 0;
 			color: #444;
 			font-size: 32px;
 			text-align: center;
 			background: #f6f6f6;
 		}
 	}
+		.beers {
+			list-style: none;
+			margin: 20px 0;
+			padding: 0;
+			li {
+				font-size: 14px;
+				text-align: center;
+			}
+		}
+		.add-beer--toggle {
+			display: block;
+			margin-top: 10px;
+			text-align: center;
+			background: linear-gradient(to bottom, #999 0%, #999 50%, #777 100%);
+			color: #fff;
+			padding: 5px 10px;
+			border-radius: 4px;
+			text-decoration: none;
+			font-size: 14px;
+			border-bottom: 1px solid #555;
+			&:hover {
+				color: #fff;
+				background: linear-gradient(to bottom, #939393 0%, #939393 50%, #717171 100%);
+			}
+		}
+		.add-beer--entry {
+			label {
+				text-align: center;
+				font-size: 14px;
+				color: #777;
+				margin: 20px 0 10px;
+			}
+			button {
+				width: 80px;
+				height: 40px;
+				margin: 0;
+				background: #666;
+				color:#fff;
+				font-weight: 400;
+				border-radius: 0 4px 4px 0;
+				border-left: 1px solid #ccc;
+				background: linear-gradient(to bottom, #999 0%, #999 50%, #777 100%);
+				border-bottom: 1px solid #ccc;
+				&:hover {
+					background: linear-gradient(to bottom, #939393 0%, #939393 50%, #717171 100%);
+				}
+			}
+		}
+			.current-beer {
+				text-align: center;
+				display: inline-block;
+				font-size: 14px;
+				width: 100%;
+				color: #999;
+				&:hover {
+					color: #bbb;
+					text-decoration: underline;
+				}
+			}
+			#beer {
+				width: 278px;
+				margin: 0 0 10px;
+				border-bottom: 1px solid #ccc;
+				border-radius: 4px 0 0 4px;
+				height: 40px;
+				text-align: left;
+				text-indent: 10px;
+			}
 
 @media (min-width: 1200px) {
 	.current-pub {
@@ -58,14 +127,22 @@
 }
 @media (min-width: 768px) and (max-width: 959px) {
 	.current-pub {
+		width: 300px;
 		right: 20px;
 		bottom:0px;
+	}
+	#beer {
+		width: 178px;
 	}
 }
 @media (min-width: 640px) and (max-width: 767px) {
 	.current-pub {
+		width: 300px;
 		right: 10px;
 		bottom:0px;
+	}
+	#beer {
+		width: 178px;
 	}
 }
 @media (max-width: 639px) {
@@ -82,6 +159,20 @@
 		}
 	#add-beer {
 		text-align: center;
+	}
+	#beer {
+		width: 50%;
+		margin-left: 20%;
+	}
+	.add-beer--toggle {
+		width: 60%;
+		margin: 10px auto 0;
+	}
+	.add-beer--entry {
+		button {
+			width: 10%;
+			margin: 0 20% 0 0;
+		}
 	}
 }
 @media (max-width: 480px) {
