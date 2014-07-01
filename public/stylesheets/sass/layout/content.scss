@@ -24,7 +24,6 @@
 		z-index:1;
 		position:fixed;
 		right: 40px;
-		bottom:0px;
 		width:300px;
 		margin-left:-150px;
 		padding:20px;
@@ -46,22 +45,27 @@
 
 @media (min-width: 1200px) {
 	.current-pub {
-		right: 40px;
+		top: 15%;
+		left: 25%;
+		width: 400px;
 	}
 }
 @media (min-width: 960px) and (max-width: 1199px) {
 	.current-pub {
 		right: 40px;
+		bottom:0px;
 	}
 }
 @media (min-width: 768px) and (max-width: 959px) {
 	.current-pub {
 		right: 20px;
+		bottom:0px;
 	}
 }
 @media (min-width: 640px) and (max-width: 767px) {
 	.current-pub {
 		right: 10px;
+		bottom:0px;
 	}
 }
 @media (max-width: 639px) {
@@ -69,6 +73,7 @@
 		border-radius: 0;
 		margin: 0;
 		left: 0;
+		bottom:0px;
 		width: 100%;
 		text-align: center;
 	}
