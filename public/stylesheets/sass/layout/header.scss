@@ -8,7 +8,6 @@
 	z-index:1;
 	position:fixed;
 	top:0;
-	width:300px;
 	background: linear-gradient(to bottom, #f6f6f6 0%, #f6f6f6 70%, #e6e6e6 100%);
 	color:$white;
 	border-radius: 0 0 8px 8px;
@@ -41,7 +40,7 @@
 				margin: 20px 0 10px;
 			}
 			input {
-				width: 220px;
+				width: 320px;
 				margin: 0;
 				border-bottom: 1px solid #ccc;
 				border-radius: 4px 0 0 4px;
@@ -85,13 +84,13 @@
 @media (min-width: 1200px) {
 	#site-header {
 		right: 40px;
-		width: 300px;
+		width: 400px;
 	}
 }
 @media (min-width: 960px) and (max-width: 1199px) {
 	#site-header {
 		right: 40px;
-		width: 300px;
+		width: 400px;
 	}
 }
 @media (min-width: 768px) and (max-width: 959px) {
@@ -99,12 +98,22 @@
 		right: 20px;
 		width: 300px;
 	}
+		.inner {
+			input {
+				width: 220px;
+			}
+		}
 }
 @media (min-width: 640px) and (max-width: 767px) {
 	#site-header {
 		right: 10px;
 		width: 300px;
 	}
+		.inner {
+			input {
+				width: 220px;
+			}
+		}
 }
 @media (max-width: 639px) {
 	#site-header {
