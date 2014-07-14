@@ -25,11 +25,10 @@
 		position:fixed;
 		right: 40px;
 		width:400px;
-		margin-left:-150px;
 		padding:20px;
 		color:#444;
 		background: linear-gradient(to bottom, #f6f6f6 0%, #f6f6f6 70%, #e6e6e6 100%);
-		border-radius: 8px 8px 0 0;
+		border-radius: 8px;
 		border-left: 1px solid #ddd;
 		border-right: 1px solid #ddd;
 		overflow:auto;
@@ -113,38 +112,28 @@
 
 @media (min-width: 1200px) {
 	.current-pub {
-		top: 15%;
-		left: 25%;
+		top: 240px;
+		left: 100px;
 		width: 400px;
 	}
 }
 @media (min-width: 960px) and (max-width: 1199px) {
 	.current-pub {
-		right: 40px;
-		bottom:0px;
+		left: 100px;
+		top: 240px;
 	}
 }
 @media (min-width: 768px) and (max-width: 959px) {
 	.current-pub {
 		width: 300px;
-		right: 20px;
-		bottom:0px;
+		left: 100px;
+		top: 240px;
 	}
 	#beer {
 		width: 178px;
 	}
 }
-@media (min-width: 640px) and (max-width: 767px) {
-	.current-pub {
-		width: 300px;
-		right: 10px;
-		bottom:0px;
-	}
-	#beer {
-		width: 178px;
-	}
-}
-@media (max-width: 639px) {
+@media (max-width: 767px) {
 	.current-pub {
 		border-radius: 0;
 		margin: 0;
