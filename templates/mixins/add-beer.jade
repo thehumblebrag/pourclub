@@ -8,10 +8,7 @@ mixin add-beer
         button(type="submit").search-button Go
         ul.search-beers(ng-if="drink_recommendations")
           li.beer(ng-repeat="beer in drink_recommendations")
-            img.beer-label(ng-src="{{beer.image}}", alt="{{beer.name}} label")
-            .beer-name {{beer.name}}
-            .beer-style {{beer.style}}
-            .beer-creator {{beer.creator_name}}
             .beer-actions
-              button(ng-click="saveBeerToPub(beer)") Add this beer
+              button(ng-click="saveBeerToPub(beer)") Add
+            .beer-name {{beer.name}} {{beer.style}}
       a.current-beer(href="#", ng-click="toggle()") Nevermind
