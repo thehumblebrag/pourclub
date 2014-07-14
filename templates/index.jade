@@ -37,6 +37,7 @@ html(lang="en", ng-app="pourclub")
           span.loading Loading map...
         section.current-pub(ng-if="current", ng-controller="PlaceDrinkCtrl")
           h2 {{current.name}}
+          img.current-pub-photo(ng-src="{{current.image}}")
           .current-pub-address {{current.address}}
           a.current-pub-url(ng-if="current.url", ng-href="{{current.url}}") Website
           ul.beers(ng-if="current.drinks")

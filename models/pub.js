@@ -23,6 +23,7 @@ var schema = new mongoose.Schema({
     },
     address: String,
     url: String,
+    image: String,
     drinks: [{
         type: ObjectId,
         ref: 'Drink'

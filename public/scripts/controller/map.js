@@ -7,9 +7,6 @@ pourclub.controller('MapCtrl', [
 function ($scope, PubFactory, PubService, LocationService) {
     // Set current from service and update as it changes
     $scope.current = null;
-    $scope.$watch(function () { return PubService.getCurrent(); }, function (new_pub, old_pub) {
-        $scope.current = new_pub;
-    });
     // Remove current pub
     $scope.close = function () {
         PubService.setCurrent(null);
