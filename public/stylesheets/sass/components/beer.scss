@@ -1,31 +1,31 @@
 // beer styles go here
 
 .search-beers {
+	height: 200px;
+	overflow: auto;
 	padding:0;
 	.beer {
-		padding:0;
+		padding:5px 0;
 		list-style:none;
-		display: block;
 		border-bottom:dotted 1px #fff;
+		overflow:auto;
 	}
 	.beer-name {
-		font-weight:$bold;
+		float:left;
+		display:inline-block;
+		max-width:260px;
+		width:auto;
 		margin-top:5px;
 		margin-bottom:5px;
-	}
-	.beer-creator {
 		font-size:$small;
 	}
-	.beer-label {
-		width:50px;
-		height:50px;
-		float:left;
-		margin-top:5px;
-		margin-right:5px;
-		display: block;
-	}
 	.beer-actions {
+		float:right;
+		display:inline-block;
 		text-align:right;
+		button {
+			border-radius: 4px;
+		}
 	}
 }
 .beers {
