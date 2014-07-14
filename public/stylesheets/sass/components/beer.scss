@@ -5,26 +5,27 @@
 	overflow: auto;
 	padding:0;
 	.beer {
-		padding:0;
+		padding:5px 0;
 		list-style:none;
-		display:inline-block;
 		border-bottom:dotted 1px #fff;
 		overflow:auto;
 	}
 	.beer-name {
 		float:left;
+		display:inline-block;
+		max-width:260px;
+		width:auto;
 		margin-top:5px;
 		margin-bottom:5px;
+		font-size:$small;
 	}
 	.beer-actions {
 		float:right;
+		display:inline-block;
 		text-align:right;
 		button {
 			border-radius: 4px;
 		}
-	}
-	.beer-style {
-		font-size:$small;
 	}
 }
 .beers {
