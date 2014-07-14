@@ -23,7 +23,7 @@ module.exports.param = function (req, res, next, drink_id) {
 
 module.exports.list = function (req, res, next) {
     var search = req.query.search;
-    var limit = req.query.limit || 3;
+    var limit = req.query.limit || 69;
     if (search) {
         return Drink.textSearch(search, { limit: limit, lean: true }, function (err, results) {
             if (err) {
