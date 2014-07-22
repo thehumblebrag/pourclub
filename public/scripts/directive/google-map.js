@@ -12,12 +12,18 @@ function (PubService, LocationService) {
     var _markers = [];
     var addMapMarker = function (map, position, id, title, icon) {
         var marker = new google.maps.Marker({
-                map: map,
-                position: position,
-                title: title,
-                icon: icon,
-                optimized: false
-            });
+            map: map,
+            position: position,
+            title: title,
+            icon: {
+                url: '/images/pin.png',
+                size: new google.maps.Size(50, 50),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(25, 25),
+                scaledSize: new google.maps.Size(50, 50)
+            },
+            optimized: false
+        });
         marker.id = id;
         _markers.push(marker);
         return marker;
@@ -33,6 +39,8 @@ function (PubService, LocationService) {
             $scope.$apply(function () {
                 PubService.setCurrent(pub);
             });
+            map.setCenter(latlng);
+            map.setZoom(18);
         });
         marker.pub = pub;
     };
@@ -83,10 +91,10 @@ function (PubService, LocationService) {
             var google_map = new google.maps.Map(element[0], {
                 center: new google.maps.LatLng(-31.9522, 115.8589),
                 zoom: 15,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                scrollwheel: false,
+                mapTypeId: google.maps.MapTypeId.TERRAIN,
                 navigationControl: false,
-                mapTypeControl: false
+                mapTypeControl: false,
+                disableDefaultUI: true
             });
             // Update boundary search when zoom changes
             google.maps.event.addListener(map, 'zoom_changed', function() {
