@@ -1,5 +1,3 @@
-include mixins/add-beer
-
 doctype
 <!--[if IE 7]>
 html(lang="en", ng-app="invita").lt-ie10.lt-ie9.lt-ie8.lt-ie7
@@ -19,11 +17,11 @@ html(lang="en", ng-app="pourclub")
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     title Pour Club - See What's On Tap
     link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
-    script(src="//maps.google.com/maps/api/js?sensor=false&libraries=geometry")
+    script(src="//maps.google.com/maps/api/js?sensor=false&amp;libraries=geometry")
     script(src="/scripts/all.min.js")
     block head
   body
-    #site-header
+    #site-header.panel
       .inner
         .heading-wrapper
           h1.logo Pour Club
@@ -36,16 +34,27 @@ html(lang="en", ng-app="pourclub")
         .google-map(google-map)
           span.loading Loading map...
         section.current-pub(ng-if="current", ng-controller="PlaceDrinkCtrl")
-          i.panel-close(ng-click="close()") x
-          h2 {{current.name}}
-          //- img.current-pub-photo(ng-src="{{current.image}}")
-          .current-pub-address {{current.address}}
-          a.current-pub-url(ng-if="current.url", ng-href="{{current.url}}") Website
-          ul.beers(ng-if="current.drinks")
-            li.beer(ng-repeat="drink in current.drinks")
-              .beer-name {{drink.name}}
-              .beer-creator {{drink.creator.name}}
-              a.delete-beer(ng-click="deleteBeerFromPub(drink, current)") x
-          .no-beers(ng-if="!current.drinks")
-            p No beers bro, rack 'em up?
-          +add-beer
+          #current-pub.panel
+            i.panel-close(ng-click="close()") x
+            h2 {{current.name}}
+            .current-pub-address {{current.address}}
+            ul.beers(ng-if="current.drinks" ng-hide="isVisible()")
+              li.beer(ng-repeat="drink in current.drinks")
+                .beer-name {{drink.name}}
+                .beer-creator {{drink.creator.name}}
+                a.delete-beer(ng-click="deleteBeerFromPub(drink, current)") x
+            .no-beers(ng-if="!current.drinks")
+              p No beers bro, rack 'em up?
+            a.add-beer--toggle(href="#", ng-click="toggle()", ng-show="!isVisible()") Had a beer at {{current.name}} that's not listed? Add it.
+          #add-beer.panel(ng-show="isVisible()")
+            .add-beer--entry
+              form(ng-submit="searchDrinks()")
+                label(for="beer") Search for a beer:
+                input#beer(type="text", name="drink", placeholder="Coopers Pale Ale", ng-model="drink_search")
+                button(type="submit").search-button Go
+                ul.search-beers(ng-if="drink_recommendations")
+                  li.beer(ng-repeat="beer in drink_recommendations")
+                    .beer-actions
+                      button(ng-click="saveBeerToPub(beer)") Add
+                    .beer-name {{beer.name}} {{beer.style}}
+              a.current-beer(href="#", ng-click="toggle()") Nevermind

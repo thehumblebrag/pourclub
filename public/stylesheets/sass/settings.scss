@@ -8,42 +8,42 @@
     // Breakpoints
     @mixin breakpoint($point){
         @if $point == standard{
-            @media (max-width:2000px){ @content; }
+            @media (max-width: 2000px){ @content; }
         }
         @else if $point == tablet{
-            @media (max-width:1024px){ @content; }
+            @media (max-width: 1024px){ @content; }
         }
         @else if $point == mobile{
-            @media (max-width:600px){ @content; }
+            @media (max-width: 600px){ @content; }
         }
         @else if $point == retina{
-            @media (-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){ @content; }
+            @media (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dpi){ @content; }
         }
     }
 
     // Default colors (credit to https://github.com/mrmrs/colors @mrmrs_)
-    $aqua:#7fdbff;
-    $blue:#0074d9;
-    $navy:#001f3f;
-    $teal:#39cccc;
-    $green:#2ecc40;
-    $olive:#3d9970;
-    $lime:#01ff70;
-    $yellow:#ffdc00;
-    $orange:#ff851b;
-    $red:#ed1c24;
-    $fuchsia:#f012be;
-    $purple:#b10dc9;
-    $maroon:#85144b;
-    $white:#fff;
-    $silver:#ddd;
-    $gray:#aaa;
-    $black:#111;
+    $aqua: #7fdbff;
+    $blue: #0074d9;
+    $navy: #001f3f;
+    $teal: #39cccc;
+    $green: #2ecc40;
+    $olive: #3d9970;
+    $lime: #01ff70;
+    $yellow: #ffdc00;
+    $orange: #ff851b;
+    $red: #ed1c24;
+    $fuchsia: #f012be;
+    $purple: #b10dc9;
+    $maroon: #85144b;
+    $white: #fff;
+    $silver: #ddd;
+    $gray: #aaa;
+    $black: #111;
+    $dark-grey: #777;
 
     // Site colors
-    $standard-color:$white;
-    $highlight-color:$black;
+    $highlight-color: $black;
 
-    // font things
-    $bold:700;
-    $small:0.8em;
+    // Font weights
+    $bold: 700;
+    $small: 0.8em;
