@@ -9,6 +9,7 @@ function (PubService, LocationService) {
     Number.prototype.toRad = function() {
         return this * (Math.PI / 180);
     };
+    var _styles = [{"featureType":"administrative","stylers":[{"visibility":"off"}]},{"featureType":"poi","stylers":[{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"simplified"}]},{"featureType":"water","stylers":[{"visibility":"simplified"}]},{"featureType":"transit","stylers":[{"visibility":"simplified"}]},{"featureType":"landscape","stylers":[{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"visibility":"off"}]},{"featureType":"road.local","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"water","stylers":[{"color":"#84afa3"},{"lightness":52}]},{"stylers":[{"saturation":-17},{"gamma":0.36}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"color":"#3f518c"}]}];
     var _markers = [];
     var addMapMarker = function (map, position, id, title, icon) {
         var marker = new google.maps.Marker({
@@ -91,10 +92,11 @@ function (PubService, LocationService) {
             var google_map = new google.maps.Map(element[0], {
                 center: new google.maps.LatLng(-31.9522, 115.8589),
                 zoom: 15,
-                mapTypeId: google.maps.MapTypeId.TERRAIN,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
                 navigationControl: false,
                 mapTypeControl: false,
-                disableDefaultUI: true
+                disableDefaultUI: true,
+                styles: _styles
             });
             // Update boundary search when zoom changes
             google.maps.event.addListener(map, 'zoom_changed', function() {
