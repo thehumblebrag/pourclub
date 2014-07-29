@@ -17,7 +17,7 @@ function (PubService, LocationService) {
             position: position,
             title: title,
             icon: {
-                url: '/images/pin.png',
+                url: '/images/pin-drop.png',
                 size: new google.maps.Size(50, 50),
                 origin: new google.maps.Point(0, 0),
                 anchor: new google.maps.Point(25, 25),
