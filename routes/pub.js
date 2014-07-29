@@ -93,8 +93,12 @@ var listByLocation = function (req, res) {
     Pub.geoNear(point, options, function (err, terms) {
         async.map(terms,
             function (term, next) {
-                term.obj.populate('drinks', function (err, pub) {
-                    next(null, pub);
+                term.obj.populate('drinks',  function (err, pub) {
+                    async.each(pub.drinks, function (drink, done) {
+                        drink.populate('creator', done);
+                    }, function (err) {
+                        next(err, pub);
+                    });
                 });
             }, function (err, pubs) {
                 if (!pubs.length) {

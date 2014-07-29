@@ -23,15 +23,23 @@
 		float:right;
 		display:inline-block;
 		text-align:right;
-		button {
-			border-radius: 4px;
-		}
 	}
 }
 .beers {
 	list-style-type: none;
 	padding: 0px;
 	.delete-beer {
-		font-size:$small;
+		position: absolute;
+		right: 20px;
+		top: 20px;
+		height: 20px;
+		width: 20px;
+		color: $white;
+		line-height: 20px;
+		background: $black;
+		border-radius: 100%;
+		font-size: 0.8em;
+		text-align: center;
+		text-decoration: none;
 	}
 }

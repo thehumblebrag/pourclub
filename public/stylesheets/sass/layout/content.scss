@@ -23,12 +23,11 @@
 		box-sizing:border-box;
 		z-index:1;
 		position:fixed;
-		right: 40px;
-		width:400px;
-		padding:20px;
-		color:#444;
-		background: linear-gradient(to bottom, #f6f6f6 0%, #f6f6f6 70%, #e6e6e6 100%);
-		border-radius: 8px;
+		left: 20px;
+		width: 400px;
+		padding: 20px;
+		color: #444;
+		background: #f6f6f6;
 		border-left: 1px solid #ddd;
 		border-right: 1px solid #ddd;
 		overflow:auto;
@@ -45,26 +44,42 @@
 			list-style: none;
 			margin: 20px 0;
 			padding: 0;
-			li {
-				font-size: 14px;
-				text-align: center;
+			.beer {
+				position: relative;
+				height: 40px;
+				margin: 10px 0;
+				padding: 8px 0 10px 70px;
+				background-color:$white;
+				border-radius:50px;
+				text-align: left;
+				.beer-name {
+					font-size: 1em;
+					line-height: 25px;
+				}
+				.beer-creator {
+					font-size: 0.8em;
+					line-height: 10px;
+					vertical-align: top;
+				}
+				&:before {
+					content: '';
+					background: $red;
+					width: 58px;
+					height: 58px;
+					border-radius: 100%;
+					position: absolute;
+					top: 0;
+					left: 0;
+				}
 			}
 		}
 		.add-beer--toggle {
 			display: block;
 			margin-top: 10px;
-			text-align: center;
-			background: linear-gradient(to bottom, #999 0%, #999 50%, #777 100%);
-			color: #fff;
 			padding: 5px 10px;
-			border-radius: 4px;
-			text-decoration: none;
 			font-size: 14px;
-			border-bottom: 1px solid #555;
-			&:hover {
-				color: #fff;
-				background: linear-gradient(to bottom, #939393 0%, #939393 50%, #717171 100%);
-			}
+			text-align: center;
+			text-decoration: none;
 		}
 		.add-beer--entry {
 			label {
@@ -80,12 +95,11 @@
 				background: #666;
 				color:#fff;
 				font-weight: 400;
-				border-radius: 0 4px 4px 0;
 				border-left: 1px solid #ccc;
-				background: linear-gradient(to bottom, #999 0%, #999 50%, #777 100%);
+				background: #999;
 				border-bottom: 1px solid #ccc;
 				&:hover {
-					background: linear-gradient(to bottom, #939393 0%, #939393 50%, #717171 100%);
+					background: #939393;
 				}
 			}
 		}
@@ -104,7 +118,6 @@
 				width: 278px;
 				margin: 0 0 10px;
 				border-bottom: 1px solid #ccc;
-				border-radius: 4px 0 0 4px;
 				height: 40px;
 				text-align: left;
 				text-indent: 10px;
@@ -113,20 +126,17 @@
 @media (min-width: 1200px) {
 	.current-pub {
 		top: 240px;
-		left: 100px;
 		width: 400px;
 	}
 }
 @media (min-width: 960px) and (max-width: 1199px) {
 	.current-pub {
-		left: 100px;
 		top: 240px;
 	}
 }
 @media (min-width: 768px) and (max-width: 959px) {
 	.current-pub {
 		width: 300px;
-		left: 100px;
 		top: 240px;
 	}
 	#beer {
@@ -135,9 +145,7 @@
 }
 @media (max-width: 767px) {
 	.current-pub {
-		border-radius: 0;
 		margin: 0;
-		left: 0;
 		bottom:0px;
 		width: 100%;
 		text-align: center;

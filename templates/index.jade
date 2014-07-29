@@ -26,7 +26,7 @@ html(lang="en", ng-app="pourclub")
     #site-header
       .inner
         .heading-wrapper
-          h1.logo #[span The] Pour Club
+          h1.logo Pour Club
         form#location-search(ng-controller="LocationCtrl", ng-submit="findLocation()")
           label See what's on tap in:
           input(type="text", ng-model="location_search", placeholder="Mt Lawley")
@@ -38,12 +38,14 @@ html(lang="en", ng-app="pourclub")
         section.current-pub(ng-if="current", ng-controller="PlaceDrinkCtrl")
           i.panel-close(ng-click="close()") x
           h2 {{current.name}}
-          img.current-pub-photo(ng-src="{{current.image}}")
+          //- img.current-pub-photo(ng-src="{{current.image}}")
           .current-pub-address {{current.address}}
           a.current-pub-url(ng-if="current.url", ng-href="{{current.url}}") Website
           ul.beers(ng-if="current.drinks")
-            li(ng-repeat="drink in current.drinks") {{drink.name}}
-              a.delete-beer(ng-click="deleteBeerFromPub(drink, current)") [x]
+            li.beer(ng-repeat="drink in current.drinks")
+              .beer-name {{drink.name}}
+              .beer-creator {{drink.creator.name}}
+              a.delete-beer(ng-click="deleteBeerFromPub(drink, current)") x
           .no-beers(ng-if="!current.drinks")
             p No beers bro, rack 'em up?
           +add-beer

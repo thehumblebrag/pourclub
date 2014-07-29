@@ -9,15 +9,22 @@ function (PubService, LocationService) {
     Number.prototype.toRad = function() {
         return this * (Math.PI / 180);
     };
+    var _styles = [{"featureType":"administrative","stylers":[{"visibility":"off"}]},{"featureType":"poi","stylers":[{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"simplified"}]},{"featureType":"water","stylers":[{"visibility":"simplified"}]},{"featureType":"transit","stylers":[{"visibility":"simplified"}]},{"featureType":"landscape","stylers":[{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"visibility":"off"}]},{"featureType":"road.local","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"water","stylers":[{"color":"#84afa3"},{"lightness":52}]},{"stylers":[{"saturation":-17},{"gamma":0.36}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"color":"#3f518c"}]}];
     var _markers = [];
     var addMapMarker = function (map, position, id, title, icon) {
         var marker = new google.maps.Marker({
-                map: map,
-                position: position,
-                title: title,
-                icon: icon,
-                optimized: false
-            });
+            map: map,
+            position: position,
+            title: title,
+            icon: {
+                url: '/images/pin.png',
+                size: new google.maps.Size(50, 50),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(25, 25),
+                scaledSize: new google.maps.Size(50, 50)
+            },
+            optimized: false
+        });
         marker.id = id;
         _markers.push(marker);
         return marker;
@@ -33,6 +40,8 @@ function (PubService, LocationService) {
             $scope.$apply(function () {
                 PubService.setCurrent(pub);
             });
+            map.setCenter(latlng);
+            map.setZoom(18);
         });
         marker.pub = pub;
     };
@@ -84,9 +93,10 @@ function (PubService, LocationService) {
                 center: new google.maps.LatLng(-31.9522, 115.8589),
                 zoom: 15,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
-                scrollwheel: false,
                 navigationControl: false,
-                mapTypeControl: false
+                mapTypeControl: false,
+                disableDefaultUI: true,
+                styles: _styles
             });
             // Update boundary search when zoom changes
             google.maps.event.addListener(map, 'zoom_changed', function() {
