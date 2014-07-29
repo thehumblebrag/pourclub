@@ -2,12 +2,7 @@
  * Webfont inclues
  */
 
-@import url(http://fonts.googleapis.com/css?family=Merriweather:400,400italic);
-@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:700);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,700);
-@import url(http://fonts.googleapis.com/css?family=Economica:400,700,400italic,700italic);
-@import url(http://fonts.googleapis.com/css?family=Pathway+Gothic+One);
-
+@import url(http://fonts.googleapis.com/css?family=Merriweather:400,400italic|Roboto+Slab:700|Open+Sans:300,700|Economica:400,700,400italic,700italic|Pathway+Gothic+One);
 @font-face {
 	font-family: "Flaticon";
 	src: url("iconfont/flaticon.eot");
@@ -19,7 +14,7 @@
 	font-style: normal;
 }
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
-[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {
 	font-family: Flaticon;
         font-size: 20px;
 font-style: normal;

@@ -14,12 +14,9 @@ $font-body: 'Open Sans', sans-serif;
 
 // paragraph
 body{
-    font-family:$font-body;
-    font-size:$font-size;
-    font-weight:200;
-    line-height:1.4em;
-    color:$black;
-    background:$white;
+  font: 200 normal $font-size#{'px'}/1.4em $font-body;
+  color:$black;
+  background:$white;
 }
 
 // links
