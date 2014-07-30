@@ -1,28 +1,108 @@
-.current-pub-address {
-	font-size:12px;
-	color: #aaa;
-	text-align:center;
+.current-pub {
+  position: fixed;
+  top: 220px;
+  left: 20px;
+  width: 400px;
+  background: darken(#f6f6f6, 20);
+  h2 {
+    padding: 0;
+    margin: 0;
+    color: #444;
+    font-size: 32px;
+    text-align: center;
+    background: #f6f6f6;
+  }
 }
-.current-pub-url {
-	font-size:$small;
-	text-align:center;
-	display: block;
-}
-.current-pub-photo {
-	width: 100%;
-	height: auto;
-}
-.panel-close {
-	position:absolute;
-	top:5px;
-	right:5px;
-	display:block;
-	width:20px;
-	height:20px;
-	text-align:center;
-	font-style:normal;
-	font-weight:bold;
-	font-size:11px;
-	line-height:20px;
-	cursor:pointer;
+  .current-pub-address {
+    font-size: 1em;
+    color: $dark-grey;
+    text-align: center;
+  }
+
+  .beers {
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+    .beer {
+      position: relative;
+      height: 40px;
+      margin: 10px 0;
+      padding: 8px 0 10px 70px;
+      background-color: $white;
+      border-radius: 50px;
+      text-align: left;
+      .beer-name {
+        font-size: 1em;
+        line-height: 25px;
+      }
+      .beer-creator {
+        font-size: 0.8em;
+        line-height: 10px;
+        vertical-align: top;
+      }
+      &:before {
+        content: '';
+        background: $black;
+        width: 58px;
+        height: 58px;
+        border-radius: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+  .add-beer--toggle {
+    display: block;
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+  }
+  .add-beer--entry {
+    label {
+      text-align: center;
+      color: $dark-grey;
+      margin: 10px 0;
+    }
+    button {
+      width: 80px;
+      height: 40px;
+      margin: 0;
+      background: #666;
+      color: #fff;
+      font-weight: 400;
+      border-left: 1px solid #ccc;
+      background: #999;
+      border-bottom: 1px solid #ccc;
+      &:hover {
+        background: #939393;
+      }
+    }
+  }
+    .current-beer {
+      text-align: center;
+      display: inline-block;
+      font-size: 14px;
+      width: 100%;
+      color: #999;
+      &:hover {
+        color: #bbb;
+        text-decoration: underline;
+      }
+    }
+    #beer {
+      width: 278px;
+      margin: 0 0 10px;
+      border-bottom: 1px solid #ccc;
+      height: 40px;
+      text-align: left;
+      text-indent: 10px;
+    }
+
+#add-beer {
+	position: fixed;
+	top: 325px;
+	left: 20px;
 }
