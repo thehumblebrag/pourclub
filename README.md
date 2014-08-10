@@ -6,7 +6,7 @@ Do your homework, make sure you prepare before you pour when setting out to get 
 
 Never drink Fosters again. Pour Club.
 
-## Getting Started and requirements
+## Requirements
 
 The following are all required, for Mac just use `brew` and for others... figure it out.
 
